@@ -6,7 +6,7 @@
     <p>Starfall, by and for Starfall users</p>
 </div>
 
-### Installation
+## Installation
 
 Run `git clone https://github.com/neostarfall/neostarfall` inside of `steamapps/common/Garrysmod/garrysmod/addons`
 
