@@ -3,12 +3,12 @@
         <img src="./branding/neostarfall_logo_512x512.png" width="256" height="256" />
     </a>
     <h1>neostarfall</h1>
-    <p>StarfallEx, but better. <s>and not by groomers</s></p>
+    <p>Starfall, by and for Starfall users</p>
 </div>
 
 ### Installation
 
-Inside of `steamapps/common/Garrysmod/garrysmod/addons` run ``git clone https://github.com/neostarfall/neostarfall``
+Run `git clone https://github.com/neostarfall/neostarfall` inside of `steamapps/common/Garrysmod/garrysmod/addons`
 
 ## Resources
 
@@ -18,10 +18,10 @@ The DLLs previously here were removed because:
 3. Don't apply to linux and mac users.
 
 Here's releases for those modules:
-- `socket` -> https://github.com/danielga/gmod_luasocket/releases/latest
-- `xinput` -> https://github.com/mitterdoo/garrysmod-xinput/releases/latest
-- `joystick` -> [you have to compile it on your own, but it's a simple batchfile.](https://github.com/MattJeanes/Joystick-Module)
+- [`socket`](https://neostarfall.github.io/neostarfall/#Libraries.socket) -> https://github.com/danielga/gmod_luasocket/releases/latest
+- [`xinput`](https://neostarfall.github.io/neostarfall/#Libraries.xinput) -> https://github.com/mitterdoo/garrysmod-xinput/releases/latest
+- [`joystick`](https://neostarfall.github.io/neostarfall/#Libraries.joystick) -> [you have to compile it on your own, but it's a simple batchfile.](https://github.com/MattJeanes/Joystick-Module)
 
 The rest of the modules:
-- `vr` -> [installer here](https://github.com/catsethecat/vrmod-module/releases/tag/v21)
+- [`vr`](https://neostarfall.github.io/neostarfall/#Libraries.vr) -> [installer here](https://github.com/catsethecat/vrmod-module/releases/tag/v21)
 - `...` -> (PR these!)
