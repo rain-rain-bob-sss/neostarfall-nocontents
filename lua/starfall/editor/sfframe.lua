@@ -82,29 +82,36 @@ Editor.EditorFileAutoReloadInterval = CreateClientConVar("sf_editor_file_auto_re
 
 function SF.DefaultCode()
 	if file.Exists("starfall/default.txt", "DATA") then
-		return file.Read("starfall/default.txt", "DATA")
-	elseif file.Exists("starfall/default.lua", "DATA") then
-		return file.Read("starfall/default.lua", "DATA")
-	else
-		local code = [=[
+		local contents = file.Read("starfall/default.txt", "DATA")
+		local contentsHash = util.CRC(contents)
+
+		-- Check if same as the old default
+		if contentsHash == 0xd75b2989 then
+			return contents
+		end
+
+		-- Won't be storing it if it's the default anymore.
+		file.Delete("starfall/default.txt")
+	end
+
+	local code = [=[
 --@name Untitled
 --@author ]=] .. string.gsub(LocalPlayer():Nick(), "[^%w%s%p_]", "") ..[=[
 
 --@shared
 
 --[[
-Neostarfall Scripting Environment
+	Starfall Scripting Environment
 
-Neostarfall Addon: https://github.com/neostarfall/neostarfall
-Documentation: http://neostarfall.github.io/neostarfall
+	Neostarfall Addon: https://github.com/neostarfall/neostarfall
+	Documentation: http://neostarfall.github.io/neostarfall
 
-This default code can be edited via the 'default.txt' file
+	This default code can be edited by creating a 'starfall/default.txt' file
 ]]
 ]=]
-		code = string.gsub(code, "\r", "")
-		file.Write("starfall/default.txt", code)
-		return code
-	end
+
+	code = string.gsub(code, "\r", "")
+	return code
 end
 
 cvars.AddChangeCallback("sf_editor_layout", function()
