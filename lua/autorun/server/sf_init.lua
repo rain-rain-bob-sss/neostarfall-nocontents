@@ -56,7 +56,6 @@ local resourceFiles = {
 
 for root, files in pairs(resourceFiles) do
 	for _, file in ipairs(files) do
-		print("Adding " .. root .. file)
 		resource.AddFile(root .. file)
 	end
 end
