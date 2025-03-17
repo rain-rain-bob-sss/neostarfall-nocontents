@@ -497,6 +497,7 @@ function instance:prepareRender()
 	surface.SetDrawColor(255, 255, 255, 255)
 	surface.DisableClipping( true )
 	renderdata.isRendering = true
+	renderdata.updatedScreenTex = false
 	if not renderingView then
 		renderdata.needRT = false
 		renderdata.scrW = ScrW()
@@ -1136,7 +1137,6 @@ render_library.setMaterialEffectColourModify = render_library.setMaterialEffectC
 -- @param number blury The amount of vertical blur to apply.
 -- @param number passes The number of times the blur effect is applied.
 function render_library.drawBlurEffect(blurx, blury, passes)
-
 	checkpermission(instance, nil, "render.effects")
 	if not renderdata.isRendering then SF.Throw("Not in rendering hook.", 2) end
 	if not renderdata.usingRT then SF.Throw("Cannot use this function outside of a rendertarget.", 2) end
@@ -1150,7 +1150,19 @@ function render_library.drawBlurEffect(blurx, blury, passes)
 	local aspectRatio = w / h
 
 	render.BlurRenderTarget(rt, blurx*aspectRatio, blury, passes)
+end
 
+--- Copies the entire screen to the screen effect texture.
+-- @param number textureIndex Texture index to update. Max index is 3, but the engine only creates the first two for you.
+function render_library.updateScreenEffectTexture(index)
+	if not renderdata.isRendering then SF.Throw("Not in a rendering hook.", 2) end
+
+	-- Running render.UpdateScreenEffectTexture(...) 10k times in a render hook doesn't exceed quota for some reason.
+	if renderdata.updatedScreenTex then SF.Throw("Can't update screen effect textures more than once per render.") end
+	renderdata.updatedScreenTex = true
+
+	index = clamp(index, 0, 3)
+	render.UpdateScreenEffectTexture(index)
 end
 
 --- Check if the specified render target exists.
