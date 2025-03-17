@@ -1158,7 +1158,7 @@ function render_library.updateScreenEffectTexture(index)
 	if not renderdata.isRendering then SF.Throw("Not in a rendering hook.", 2) end
 
 	-- Running render.UpdateScreenEffectTexture(...) 10k times in a render hook doesn't exceed quota for some reason.
-	if renderdata.updatedScreenTex then SF.Throw("Can't update screen effect textures more than once per render.") end
+	if renderdata.updatedScreenTex then SF.Throw("Can't update screen effect textures more than once per render.", 2) end
 	renderdata.updatedScreenTex = true
 
 	index = clamp(index, 0, 3)
