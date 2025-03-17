@@ -73,7 +73,14 @@ TabHandler.HighlightOnDoubleClickConVar = CreateClientConVar("sf_editor_wire_hig
 TabHandler.DisplayCaretPosConVar = CreateClientConVar("sf_editor_wire_display_caret_pos", "0", true, false)
 TabHandler.AutoIndentConVar = CreateClientConVar("sf_editor_wire_auto_indent", "1", true, false)
 TabHandler.EnableAntialiasing = CreateClientConVar("sf_editor_wire_enable_antialiasing", "1", true, false)
-TabHandler.ScrollSpeedConVar = CreateClientConVar("sf_editor_wire_scrollmultiplier", 1, true, false)
+
+TabHandler.ScrollSpeedConVar = CreateClientConVar("sf_editor_wire_scrollmultiplier", "2.5", true, false)
+if TabHandler.ScrollSpeedConVar:GetFloat() == 1 then
+	-- Change the old default from 1 to 2.5.
+	-- I suppose people that want a value of '1' will have to set it to 1.001 or something.
+	TabHandler.ScrollSpeedConVar:SetFloat(2.5)
+end
+
 TabHandler.LinesHiddenFormatConVar = CreateClientConVar("sf_editor_wire_lines_hidden_format", "< %d lines hidden >", true, false)
 TabHandler.AutoValidateConVar = CreateClientConVar("sf_editor_wire_validateontextchange", "0", true, false)
 TabHandler.CacheDebug = CreateClientConVar("sf_editor_wire_cachedebug", "0", true, false)
