@@ -14,7 +14,7 @@ cvars.AddChangeCallback("starfall_toolscreen_fps", function(_, _, value)
 end)
 
 -- Tuning vars
-local color_background       = Color(41, 38, 52)                  -- Background color
+local color_background       = Color(54, 37, 0)                  -- Background color
 local color_text             = Color(240, 240, 253, 255)          -- Text color for subtitle and scrolling text
 local color_text_outline     = ColorAlpha(color_background, 80)   -- Outline text color for subtitle and scrolling text
 local star_count             = 8                                  -- Amount of stars to render
@@ -43,7 +43,7 @@ local function star_randomize(star)
 	star.ang_dir = math.random() < 0.5 and 1 or -1
 
 	if last_error_time < RealTime() then
-		star.color = HSVToColor(190 + math.random() * 30, math_rand(0.6, 1), 0.9)
+		star.color = HSVToColor(20 + math.random() * 30, math_rand(0.6, 1), 0.9)
 	else
 		star.color = HSVToColor(350 + math_random() * 20, math_rand(0.6, 1), 0.9)
 	end
@@ -171,6 +171,7 @@ function SF.DrawToolgunScreen(w, h, title, scroll_text)
 	surface.SetMaterial(overlay_material)
 	surface.DrawTexturedRect(0, 0, w, h)
 	draw.SimpleTextOutlined(title, "StarfallToolBig", 128, 90, color_text, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER, 2, color_text_outline)
+
 
 	if scroll_text then
 		surface.SetFont("StarfallToolSmall")
