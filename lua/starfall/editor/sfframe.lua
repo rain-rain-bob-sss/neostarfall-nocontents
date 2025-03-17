@@ -93,7 +93,7 @@ function SF.DefaultCode()
 --@shared
 
 --[[
-Starfall Scripting Environment
+Neostarfall Scripting Environment
 
 Neostarfall Addon: https://github.com/neostarfall/neostarfall
 Documentation: http://neostarfall.github.io/neostarfall

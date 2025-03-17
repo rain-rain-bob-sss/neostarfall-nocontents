@@ -252,7 +252,7 @@ end
 SF.Editor.Themes.AddTheme("default", {
 	Name = "Default Theme",
 
-	["background"] = Color(39,40,34),
+	["background"] = Color(18, 12, 0),
 	["line_highlight"] = Color(39, 40, 34),
 
 	["gutter_foreground"] = Color(143,144,138),

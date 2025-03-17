@@ -54,11 +54,11 @@ if CLIENT then
 
 	-- Colors
 	SF.Editor.colors = {}
-	SF.Editor.colors.dark = Color(36, 41, 53)
-	SF.Editor.colors.meddark = Color(48, 57, 92)
-	SF.Editor.colors.med = Color(78, 122, 199)
-	SF.Editor.colors.medlight = Color(127, 178, 240)
-	SF.Editor.colors.light = Color(173, 213, 247)
+	SF.Editor.colors.dark = Color(48, 32, 0)
+	SF.Editor.colors.meddark = Color(79, 53, 0)
+	SF.Editor.colors.med = Color(110, 75, 4)
+	SF.Editor.colors.medlight = Color(163, 113, 11)
+	SF.Editor.colors.light = Color(214, 147, 9)
 
 	function SF.Editor.init()
 		if SF.Editor.initialized or SF.Editor.editor then return end
@@ -170,7 +170,7 @@ if CLIENT then
 			if v.Init then v:Init() end
 		end
 
-		editor:Setup("Starfall Editor (" .. GetGlobalString("SF.Version") .. ")", "starfall", "Starfall")
+		editor:Setup("Neostarfall Editor (" .. GetGlobalString("SF.Version") .. ")", "starfall", "Starfall")
 	end
 
 	function SF.Editor.createGlobalPermissionsPanel(client, server)
