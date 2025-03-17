@@ -1,6 +1,8 @@
-# neostarfall [![License](https://img.shields.io/github/license/neostarfall/neostarfall?color=red)](LICENSE) [![Discord](https://img.shields.io/discord/1350996201713045594?label=Discord&logo=discord&logoColor=ffffff&labelColor=7289DA&color=2c2f33)](https://discord.gg/aSXXa4urpm)
-
-> Starfall, but not by groomers :v)
+<div align="center">
+    <img src="./branding/neostarfall_logo_512x512.png" width="256" height="256" />
+    <h1>neostarfall</h1>
+    <p>StarfallEx, but better. <s>and not by groomers</s></p>
+</div>
 
 ### Installation
 
