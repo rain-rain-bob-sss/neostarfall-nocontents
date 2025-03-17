@@ -1,6 +1,6 @@
-TOOL.Category		= "Starfall"
+TOOL.Category		= "Neostarfall"
 TOOL.Wire_MultiCategories = { "Chips, Gates" }
-TOOL.Name			= "Starfall - Components"
+TOOL.Name			= "Component"
 TOOL.Command		= nil
 TOOL.ConfigName		= ""
 
@@ -45,14 +45,14 @@ if SERVER then
 	end, "Pos", "Ang", "Model")
 
 else
-	language.Add("Tool.starfall_component.name", "Starfall - Component")
-	language.Add("Tool.starfall_component.desc", "Spawns a Starfall component. (Press Shift+F to switch to the processor tool)")
+	language.Add("Tool.starfall_component.name", "Neostarfall - Component")
+	language.Add("Tool.starfall_component.desc", "Spawns a Neostarfall component. (Press Shift+F to switch to the processor tool)")
 	language.Add("Tool.starfall_component.parent", "Parent instead of Weld" )
 	language.Add("Tool.starfall_component.createflat", "Create flat to surface" )
-	language.Add("sboxlimit_starfall_components", "You've hit the Starfall Component limit!")
-	language.Add("undone_Starfall Screen", "Undone Starfall Screen")
-	language.Add("undone_Starfall HUD", "Undone Starfall HUD")
-	language.Add("Cleanup_starfall_components", "Starfall Components")
+	language.Add("sboxlimit_starfall_components", "You've hit the Neostarfall Component limit!")
+	language.Add("undone_Starfall Screen", "Undone Neostarfall Screen")
+	language.Add("undone_Starfall HUD", "Undone Neostarfall HUD")
+	language.Add("Cleanup_starfall_components", "Neostarfall Components")
 	TOOL.Information = {
 		{ name = "left", stage = 0, text = "Spawn a component" },
 		{ name = "right_0", stage = 0, text = "Link to processor" },

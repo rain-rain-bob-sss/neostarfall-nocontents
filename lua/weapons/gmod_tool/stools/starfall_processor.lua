@@ -1,5 +1,5 @@
-TOOL.Category		= "Starfall"
-TOOL.Name			= "Starfall - Processor"
+TOOL.Category		= "Neostarfall"
+TOOL.Name			= "Processor"
 TOOL.Command		= nil
 TOOL.ConfigName		= ""
 
@@ -54,15 +54,15 @@ if SERVER then
 	end
 	duplicator.RegisterEntityClass("starfall_processor", MakeSF, "Pos", "Ang", "Model", "_inputs", "_outputs")
 else
-	language.Add("Tool.starfall_processor.name", "Starfall - Processor")
-	language.Add("Tool.starfall_processor.desc", "Spawns a Starfall processor. (Press Shift+F to switch to the component tool)")
+	language.Add("Tool.starfall_processor.name", "Neostarfall - Processor")
+	language.Add("Tool.starfall_processor.desc", "Spawns a Neostarfall processor. (Press Shift+F to switch to the component tool)")
 	language.Add("Tool.starfall_processor.left", "Spawn a processor / upload code")
 	language.Add("Tool.starfall_processor.right", "Open editor")
 	language.Add("Tool.starfall_processor.reload", "Update code without changing main file")
 	language.Add("Tool.starfall_processor.parent", "Parent instead of Weld" )
-	language.Add("sboxlimit_starfall_processor", "You've hit the Starfall processor limit!")
-	language.Add("undone_Starfall Processor", "Undone Starfall Processor")
-	language.Add("Cleanup_starfall_processor", "Starfall Processors")
+	language.Add("sboxlimit_starfall_processor", "You've hit the Neostarfall processor limit!")
+	language.Add("undone_Starfall Processor", "Undone Neostarfall Processor")
+	language.Add("Cleanup_starfall_processor", "Neostarfall Processors")
 	TOOL.Information = { "left", "right", "reload" }
 
 	net.Receive("starfall_openeditor", function(len)

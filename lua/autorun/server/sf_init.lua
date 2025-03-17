@@ -61,7 +61,7 @@ for root, files in pairs(resourceFiles) do
 end
 
 SF = {}
-SF.Version = "StarfallEx"
+SF.Version = "Neostarfall"
 local files, directories = file.Find( "addons/*", "GAME" )
 local sf_dir = nil
 for k,v in pairs(directories) do
