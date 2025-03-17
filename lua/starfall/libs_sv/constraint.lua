@@ -16,7 +16,7 @@ registerprivilege("constraints.elastic", "Elastic", "Allows the user to elastic 
 registerprivilege("constraints.nocollide", "Nocollide", "Allows the user to nocollide two entities", { entities = {} })
 registerprivilege("constraints.any", "Any", "General constraint functions", { entities = {} })
 
-local entList = SF.EntManager("constraints", "constraints", 600, "The number of constraints allowed to spawn via Starfall")
+local entList = SF.EntManager("constraints", "constraints", 600, "The number of constraints allowed to spawn via neostarfall")
 
 --- Library for creating and manipulating constraints.
 -- @name constraint

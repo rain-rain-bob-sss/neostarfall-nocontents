@@ -77,8 +77,8 @@ Editor.OpenOldTabsVar = CreateClientConVar("sf_editor_openoldtabs", "1", true, f
 Editor.WorldClickerVar = CreateClientConVar("sf_editor_worldclicker", "0", true, false)
 Editor.LayoutVar = CreateClientConVar("sf_editor_layout", "0", true, false)
 Editor.StartHelperUndocked = CreateClientConVar("sf_helper_startundocked", "0", true, false)
-Editor.EditorFileAutoReload = CreateClientConVar("sf_editor_file_auto_reload", "0", true, false, "Controls the auto reload functionality of Starfall's Editor")
-Editor.EditorFileAutoReloadInterval = CreateClientConVar("sf_editor_file_auto_reload_interval", "1", true, false, "Controls the polling interval of the auto reload functionality of Starfall's Editor")
+Editor.EditorFileAutoReload = CreateClientConVar("sf_editor_file_auto_reload", "0", true, false, "Controls the auto reload functionality of Neostarfall's Editor")
+Editor.EditorFileAutoReloadInterval = CreateClientConVar("sf_editor_file_auto_reload_interval", "1", true, false, "Controls the polling interval of the auto reload functionality of Neostarfall's Editor")
 
 function SF.DefaultCode()
 	if file.Exists("starfall/default.txt", "DATA") then
@@ -939,7 +939,7 @@ function Editor:InitComponents()
 			function( body, len, headers, code )
 				local data = util.JSONToTable(body)
 
-				local awesomePeople = "List of awesome people that contributed to StarfallEx:\n";
+				local awesomePeople = "List of awesome people that contributed to Neostarfall:\n";
 				for k,v in ipairs(data) do
 					if v.login ~= "web-flow" then
 						awesomePeople = awesomePeople .. "\n" .. v.login
@@ -1045,7 +1045,7 @@ function Editor:InitComponents()
 	end
 
 	self.C.Credit:SetTextColor(Color(0, 0, 0, 255))
-	self.C.Credit:SetText("\t\tCREDITS\n\n\tEditor by: \tSyranide and Shandolum\n\n\tTabs (and more) added by Divran.\n\n\tFixed for GMod13 By Ninja101\n\n\tModified for starfall by D.ツ") -- Sure why not ;)
+	self.C.Credit:SetText("\t\tCREDITS\n\n\tEditor by: \tSyranide and Shandolum\n\n\tTabs (and more) added by Divran.\n\n\tFixed for GMod13 By Ninja101\n\n\tModified for StarfallEx by D.ツ\n\n\tForked by the Neostarfall Team") -- Sure why not ;)
 	self.C.Credit:SetMultiline(true)
 	self.C.Credit:SetVisible(false)
 	self.C.Credit:SetEditable(false)
@@ -1179,7 +1179,7 @@ function Editor:CreateThemesPanel()
 	local label = vgui.Create("DLabel")
 	panel:AddItem(label)
 	label:DockMargin(0, 0, 0, 0)
-	label:SetText("Starfall editor supports TextMate themes.\n" ..
+	label:SetText("Neostarfall editor supports TextMate themes.\n" ..
 		"You can import them by pressing \"Add\" button.\n")
 	label:SetWrap(true)
 
@@ -2137,7 +2137,7 @@ vgui.Register( "StarfallUsers", PANEL, "StarfallFrame" )
 local userPanel
 list.Set( "DesktopWindows", "StarfallUsers", {
 
-	title		= "Starfall List",
+	title		= "Neostarfall List",
 	icon		= "radon/starfall2",
 	width		= 520,
 	height		= 700,
@@ -2152,7 +2152,7 @@ concommand.Add("sf_userlist", function()
 	if userPanel and userPanel:IsValid() then return end
 
 	userPanel = vgui.Create("StarfallUsers")
-	userPanel:SetTitle( "Starfall List" )
+	userPanel:SetTitle( "Neostarfall List" )
 	userPanel:SetSize( 520, ScrH()*0.5 )
 	userPanel:SetSizable(true)
 	userPanel:Center()

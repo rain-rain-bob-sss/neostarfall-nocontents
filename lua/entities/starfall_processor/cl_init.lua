@@ -48,7 +48,7 @@ function ENT:GetOverlayText()
 
 	local authorstr =  ent_tbl.author and string.Trim(ent_tbl.author) ~= "" and "\nAuthor: " .. ent_tbl.author or ""
 
-	return "- Starfall Processor -\n[ " .. ent_tbl.name .. " ]"..authorstr.."\nServer CPU: " .. serverstr .. "\nClient CPU: " .. clientstr
+	return "- Neostarfall Processor -\n[ " .. ent_tbl.name .. " ]"..authorstr.."\nServer CPU: " .. serverstr .. "\nClient CPU: " .. clientstr
 end
 
 function ENT:Think()
@@ -136,10 +136,10 @@ hook.Add("StarfallError", "StarfallErrorReport", function(_, owner, client, main
 			SF.AddNotify(owner, message, "ERROR", 7, "ERROR1")
 		elseif client then
 			if should_notify then
-				SF.AddNotify(owner, string.format("Starfall '%s' errored for player %s", main_file, client:Nick()), "ERROR", 7, "SILENT")
+				SF.AddNotify(owner, string.format("Neostarfall '%s' errored for player %s", main_file, client:Nick()), "ERROR", 7, "SILENT")
 				print(message)
 			else
-				print(string.format("Starfall '%s' errored for player %s: %s", main_file, client:Nick(), message))
+				print(string.format("Neostarfall '%s' errored for player %s: %s", main_file, client:Nick(), message))
 			end
 		end
 
@@ -147,7 +147,7 @@ hook.Add("StarfallError", "StarfallErrorReport", function(_, owner, client, main
 			print(traceback)
 		end
 	elseif client == local_player then
-		print(string.format("Starfall '%s' owned by %s has errored: %s", main_file, owner:Nick(), message))
+		print(string.format("Neostarfall '%s' owned by %s has errored: %s", main_file, owner:Nick(), message))
 	end
 end)
 
@@ -200,7 +200,7 @@ net.Receive("starfall_processor_used", function(len)
 	end
 end)
 
-SF.BlockedUsers = SF.BlockedList("user", "running clientside starfall code", "sf_blockedusers.txt",
+SF.BlockedUsers = SF.BlockedList("user", "running clientside neostarfall code", "sf_blockedusers.txt",
 	function(steamid)
 		local ply = player.GetBySteamID(steamid)
 		if not ply then return end
@@ -225,7 +225,7 @@ SF.SteamIDConcommand("sf_kill_cl", function( executor, ply )
 	for instance, _ in pairs( SF.playerInstances[ply] ) do
 		instance:Error( { message = "Killed by user", traceback = "" } )
 	end
-end, "Terminates a user's starfall chips clientside.", true)
+end, "Terminates a user's neostarfall chips clientside.", true)
 
 ---Terminates a user's starfall chips. Admin only
 SF.SteamIDConcommand("sf_kill", function( executor, ply )
@@ -235,4 +235,4 @@ SF.SteamIDConcommand("sf_kill", function( executor, ply )
 		net.WriteEntity( instance.entity )
 		net.SendToServer()
 	end
-end, "Admin Only. Terminate a user's starfall chips.", true )
+end, "Admin Only. Terminate a user's neostarfall chips.", true )

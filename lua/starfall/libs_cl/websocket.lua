@@ -18,7 +18,7 @@ local function make_js(address)
 		// Exposed functions to lua
 		sf.send = function(data) { sf_websocket.send(data); };
 
-		console.log("SF: Opened websocket to ]] .. address .. [[");
+		console.log("NSF: Opened websocket to ]] .. address .. [[");
 	]]
 end
 

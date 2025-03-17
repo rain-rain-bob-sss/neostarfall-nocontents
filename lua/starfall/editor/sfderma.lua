@@ -270,13 +270,10 @@ function PANEL:Setup(folder)
 		{"Async", "https://raw.githubusercontent.com/keever50/StarfallLibraries/master/async.txt"},
 		{"Console", "https://raw.githubusercontent.com/Derpius/public-starfalls/master/console/console.txt"},
 		{"CriticalPD", "https://raw.githubusercontent.com/thegrb93/MyStarfallScripts/master/libs/CriticalPD.txt"},
-		{"GifLoader", "https://raw.githubusercontent.com/thegrb93/MyStarfallScripts/master/libs/gifspritesheet.txt"},
 		{"HoloText", "https://raw.githubusercontent.com/Derpius/public-starfalls/master/libs/holotext/main.txt"},
 		{"HttpQueue", "https://raw.githubusercontent.com/ANormalTwig/PublicStarfalls/main/libraries/http_queueing.lua"},
-		{"ModelLoader", "https://raw.githubusercontent.com/thegrb93/MyStarfallScripts/master/libs/custommodellib.txt"},
 		{"ReadWriteType", "https://raw.githubusercontent.com/Jacbo1/Public-Starfall/main/ReadWriteType/readwritetype.lua"},
 		{"SafeNet", "https://raw.githubusercontent.com/Jacbo1/Public-Starfall/main/SafeNet/safeNet.lua"},
-		{"XInputNet", "https://raw.githubusercontent.com/thegrb93/MyStarfallScripts/master/libs/xinput.txt"},
 	} do
 		local node = self.Libraries:AddNode(v[1], "icon16/page_white.png")
 		node.FileURL = v[2]
@@ -715,7 +712,7 @@ function PANEL:OpenForChip( chip, showOverrides )
 	self.entIcon:SetCamPos( Vector( rad * 1.4, rad * 1.4, rad * 2 ) )
 	self.entIcon:SetLookAng( Angle( 135, 45, 180 ) )
 	self.entIcon:SetTooltip( 'Entity ID: ' .. chip:EntIndex() .. '\n\nOwner:\n' .. chip.owner:GetName() .. ' [ ' .. chip.owner:SteamID() .. ' ]' )
-	self.entName:SetText( #chip.name > 0 and chip.name or 'Starfall Processor' )
+	self.entName:SetText( #chip.name > 0 and chip.name or 'Neostarfall Processor' )
 	local desc = chip.instance.permissionRequest.description
 	self.description:SetText( #desc > 0 and desc or 'Please press "Grant" a couple of times. Then press "Apply Permissions", so this way we can provide you with interesting features.' )
 	self.description:SetTooltip( 'Description attached to permission request from\n' .. chip.owner:GetName() .. ' [ ' .. chip.owner:SteamID() .. ' ]' )

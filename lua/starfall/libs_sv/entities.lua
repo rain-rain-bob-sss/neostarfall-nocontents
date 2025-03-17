@@ -33,7 +33,7 @@ local function table_find(tbl, val)
 	for i=1, #tbl do if tbl[i]==val then return i end end
 end
 
-local collisionListenerLimit = SF.LimitObject("collisionlistener", "collisionlistner", 128, "The number of concurrent starfall collision listeners")
+local collisionListenerLimit = SF.LimitObject("collisionlistener", "collisionlistner", 128, "The number of concurrent neostarfall collision listeners")
 local base_physicscollide
 SF.GlobalCollisionListeners = {
 	__index = {

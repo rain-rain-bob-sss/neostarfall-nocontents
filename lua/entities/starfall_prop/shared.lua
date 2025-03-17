@@ -1,8 +1,8 @@
 ENT.Type            = "anim"
 ENT.Base            = "base_anim"
 
-ENT.PrintName       = "Starfall Custom Prop"
-ENT.Author          = "Sparky OvO"
+ENT.PrintName       = "Neostarfall Custom Prop"
+ENT.Author          = "Neostarfall Team"
 
 ENT.Spawnable       = false
 ENT.AdminSpawnable  = false

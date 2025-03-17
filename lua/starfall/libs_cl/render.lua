@@ -17,7 +17,7 @@ local Vec_SetUnpacked = VEC_META.SetUnpacked
 local Vec_Unpack = VEC_META.Unpack
 local Ent_GetTable = ENT_META.GetTable
 
-registerprivilege("render.screen", "Render Screen", "Allows the user to render to a starfall screen", { client = {} })
+registerprivilege("render.screen", "Render Screen", "Allows the user to render to a neostarfall screen", { client = {} })
 registerprivilege("render.hud", "Render Hud", "Allows the user to render to your hud", { client = {} })
 registerprivilege("render.offscreen", "Render Screen", "Allows the user to render without a screen", { client = {} })
 registerprivilege("render.renderView", "Render View", "Allows the user to render the world again with custom perspective", { client = {} })

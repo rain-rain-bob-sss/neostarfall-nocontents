@@ -703,7 +703,7 @@ function hook_library.runRemote(recipient, ...)
 	local recipients
 	if recipient then
 		local ent = getent(recipient)
-		if not ent.instance then SF.Throw("Entity has no starfall instance", 2) end
+		if not ent.instance then SF.Throw("Entity has no neostarfall instance", 2) end
 		recipients = {
 			[ent.instance] = true
 		}

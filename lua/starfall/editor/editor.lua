@@ -679,7 +679,7 @@ if CLIENT then
 			else
 				ErrorNoHalt("There was an error transmitting the docs. Rejoin to try again.\n")
 			end
-			SF.AddNotify(LocalPlayer(), "Error processing Starfall documentation!", "GENERIC", 7, "DRIP3")
+			SF.AddNotify(LocalPlayer(), "Error processing Neostarfall documentation!", "GENERIC", 7, "DRIP3")
 		end
 	end
 	net.Receive("starfall_docs", function(len, ply)
@@ -687,7 +687,7 @@ if CLIENT then
 			initDocs(SF.DocsData)
 			SF.DocsData = nil
 		else
-			SF.AddNotify(LocalPlayer(), "Downloading Starfall Documentation", "GENERIC", 7, "DRIP3")
+			SF.AddNotify(LocalPlayer(), "Downloading Neostarfall Documentation", "GENERIC", 7, "DRIP3")
 			net.ReadStream(nil, function(data)
 				local docfile = file.Open("sf_docs.txt", "wb", "DATA")
 				if docfile then
@@ -695,7 +695,7 @@ if CLIENT then
 					docfile:Close()
 					SF.AddNotify(LocalPlayer(), "Documentation saved to sf_docs.txt!", "GENERIC", 7, "DRIP3")
 				else
-					SF.AddNotify(LocalPlayer(), "Error saving Starfall documentation!", "GENERIC", 7, "DRIP3")
+					SF.AddNotify(LocalPlayer(), "Error saving Neostarfall documentation!", "GENERIC", 7, "DRIP3")
 				end
 				initDocs(data)
 			end)

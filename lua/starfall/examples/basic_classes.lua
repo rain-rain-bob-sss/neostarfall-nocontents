@@ -2,7 +2,7 @@
 --@author Vurv
 --@shared
 
--- This is more of a generic example for middleclass / classes in StarfallEx
+-- This is more of a generic example for middleclass / classes in Neostarfall
 -- If you want to see classes in action, see other examples like the fireplace and tcpclient examples
 
 local Student = class("Student")

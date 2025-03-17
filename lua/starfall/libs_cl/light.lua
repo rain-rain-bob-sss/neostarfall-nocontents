@@ -70,7 +70,7 @@ local function processLights(curtime)
 	end
 end
 
-local projectedLights = SF.EntManager("projectedlights", "projected lights", 20, "The number of projected light objects allowed to spawn via Starfall", 1, true)
+local projectedLights = SF.EntManager("projectedlights", "projected lights", 20, "The number of projected light objects allowed to spawn via Neostarfall", 1, true)
 
 --- Light library.
 -- @name light

@@ -8,7 +8,7 @@ registerprivilege("hologram.modify", "Modify holograms", "Allows the user to mod
 registerprivilege("hologram.create", "Create hologram", "Allows the user to create holograms", CLIENT and { client = {} } or nil)
 registerprivilege("hologram.setRenderProperty", "RenderProperty", "Allows the user to change the rendering of an entity", { entities = {} })
 
-local entList = SF.EntManager("holograms", "holograms", 200, "The number of holograms allowed to spawn via Starfall scripts for a single player")
+local entList = SF.EntManager("holograms", "holograms", 200, "The number of holograms allowed to spawn via Neostarfall scripts for a single player")
 local maxclips = CreateConVar("sf_holograms_maxclips", "8", { FCVAR_ARCHIVE, FCVAR_REPLICATED }, "The max number of clips per hologram entity")
 
 SF.ResourceCounters.Holograms = {icon = "icon16/bricks.png", count = function(ply) return entList:get(ply) end}

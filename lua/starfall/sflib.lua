@@ -208,7 +208,7 @@ SF.BurstObject = {
 			return obj.val
 		end,
 		get = function(self, ply)
-			if ply~=SF.Superuser and not Ent_IsValid(ply) then SF.Throw("Invalid starfall user", 4) end
+			if ply~=SF.Superuser and not Ent_IsValid(ply) then SF.Throw("Invalid neostarfall user", 4) end
 			local obj = self.objects[ply]
 			if not obj then
 				obj = {
@@ -255,7 +255,7 @@ SF.LimitObject = {
 				end
 				self.counters[ply] = new
 			else
-				SF.Throw("Invalid starfall user", 3)
+				SF.Throw("Invalid neostarfall user", 3)
 			end
 		end,
 		checkuse = function(self, ply, amount)
@@ -265,7 +265,7 @@ SF.LimitObject = {
 					SF.Throw("The ".. self.name .." limit has been reached. (".. self.max ..")", 3)
 				end
 			else
-				SF.Throw("Invalid starfall user", 3)
+				SF.Throw("Invalid neostarfall user", 3)
 			end
 		end,
 		check = function(self, ply)
@@ -273,7 +273,7 @@ SF.LimitObject = {
 			if Ent_IsValid(ply) then
 				return self.max - self.counters[ply]
 			else
-				SF.Throw("Invalid starfall user", 3)
+				SF.Throw("Invalid neostarfall user", 3)
 			end
 		end,
 		free = function(self, ply, amount)

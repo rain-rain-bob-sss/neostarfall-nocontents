@@ -5,8 +5,8 @@ local registerprivilege = SF.Permissions.registerPrivilege
 -- Register Privileges
 registerprivilege("sound.create", "Sound", "Allows the user to create sounds", { client = {} })
 
-local plyCount = SF.LimitObject("sounds", "sounds", 20, "The number of sounds allowed to be playing via Starfall client at once")
-local plySoundBurst = SF.BurstObject("sounds", "sounds", 10, 5, "The rate at which the burst regenerates per second.", "The number of sounds allowed to be made in a short interval of time via Starfall scripts for a single instance ( burst )")
+local plyCount = SF.LimitObject("sounds", "sounds", 20, "The number of sounds allowed to be playing via Neostarfall client at once")
+local plySoundBurst = SF.BurstObject("sounds", "sounds", 10, 5, "The rate at which the burst regenerates per second.", "The number of sounds allowed to be made in a short interval of time via Neostarfall scripts for a single instance ( burst )")
 
 SF.ResourceCounters.Sounds = {icon = "icon16/sound.png", count = function(ply) return plyCount:get(ply) end}
 

@@ -26,7 +26,7 @@ hook.add("PostDrawTranslucentRenderables", "", function()
         render.enableDepth(true)
         render.setColor(Color(10, 167, 238))
         render.setFont(font)
-        render.drawSimpleText(0, 0, "StarfallEx", 1, 1)
+        render.drawSimpleText(0, 0, "Neostarfall", 1, 1)
     render.popMatrix()
 end)
 

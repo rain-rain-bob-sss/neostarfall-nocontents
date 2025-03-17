@@ -2,7 +2,7 @@
 
 local owneraccess
 if SERVER then
-	owneraccess = CreateConVar("sf_permissions_entity_owneraccess", "0", { FCVAR_ARCHIVE }, "Allows starfall chip's owner to access their player entity")
+	owneraccess = CreateConVar("sf_permissions_entity_owneraccess", "0", { FCVAR_ARCHIVE }, "Allows any neostarfall chip's owner to access their player entity")
 end
 
 local P = {}

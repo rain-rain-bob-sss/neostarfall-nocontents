@@ -3,16 +3,16 @@ local checkluatype = SF.CheckLuaType
 local dgetmeta = debug.getmetatable
 local IsValid = FindMetaTable("Entity").IsValid
 
-SF.Permissions.registerPrivilege("console.command", "Console command", "Allows the starfall to run console commands")
+SF.Permissions.registerPrivilege("console.command", "Console command", "Allows the neostarfall to run console commands")
 
 local userdataLimit, restartCooldown, printBurst, concmdBurst
 if SERVER then
-	userdataLimit = CreateConVar("sf_userdata_max", "1048576", { FCVAR_ARCHIVE }, "The maximum size of userdata (in bytes) that can be stored on a Starfall chip (saved in duplications).")
+	userdataLimit = CreateConVar("sf_userdata_max", "1048576", { FCVAR_ARCHIVE }, "The maximum size of userdata (in bytes) that can be stored on a neostarfall chip (saved in duplications).")
 	restartCooldown = CreateConVar("sf_restart_cooldown", 5, FCVAR_ARCHIVE, "The cooldown for using restart() on the same chip.", 0.1, 60)
 	printBurst = SF.BurstObject("print", "print", 3000, 10000, "The print burst regen rate in Bytes/sec.", "The print burst limit in Bytes")
 	concmdBurst = SF.BurstObject("concmd", "concmd", 1000, 1000, "The concmd burst regen rate in Bytes/sec.", "The concmd burst limit in Bytes")
 else
-	SF.Permissions.registerPrivilege("enablehud", "Allow enabling hud", "Allows the starfall to enable hud rendering", { client = { default = 1 } })
+	SF.Permissions.registerPrivilege("enablehud", "Allow enabling hud", "Allows the neostarfall to enable hud rendering", { client = { default = 1 } })
 	restartCooldown = CreateConVar("sf_restart_cooldown_cl", 5, FCVAR_ARCHIVE, "The cooldown for using restart() on the same chip.", 0.1, 60)
 end
 
@@ -735,7 +735,7 @@ function builtins_library.getScripts(ent)
 		ent = getent(ent)
 		local oinstance = ent.instance
 		if not ent.Starfall or not oinstance then
-			SF.Throw("Invalid starfall chip", 2)
+			SF.Throw("Invalid neostarfall chip", 2)
 			return
 		elseif not oinstance.shareScripts and oinstance.player ~= instance.player then
 			SF.Throw("Not allowed", 2)
@@ -893,7 +893,7 @@ function builtins_library.loadstring(ld, source, mode, env)
 	else
 		checkluatype(env, TYPE_TABLE)
 	end
-	source = "SF:"..source
+	source = "NSF:"..source
 	local retval = SF.CompileString(ld, source, false)
 	if isfunction(retval) then
 		whitelistedEnvs[env] = true
@@ -1202,14 +1202,14 @@ end
 function builtins_library.restart(chip)
 	if chip then
 		chip = getent(chip)
-		if not (chip.Starfall and chip.sfdata) then SF.Throw("Entity has no starfall data", 2) end
-		if chip.owner ~= instance.player then SF.Throw("You don't own that starfall", 2) end
+		if not (chip.Starfall and chip.sfdata) then SF.Throw("Entity has no neostarfall data", 2) end
+		if chip.owner ~= instance.player then SF.Throw("You don't own that neostarfall", 2) end
 	else
 		chip = instance.entity
 	end
 
 	local now = CurTime()
-	if (chip.nextRestartTime or 0) > now then SF.Throw("That starfall is on restart() cooldown", 2) end
+	if (chip.nextRestartTime or 0) > now then SF.Throw("That neostarfall is on restart() cooldown", 2) end
 
 	chip.nextRestartTime = now + restartCooldown:GetFloat()
 

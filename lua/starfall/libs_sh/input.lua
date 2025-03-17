@@ -50,7 +50,7 @@ end
 registerprivilege("input", "Input", "Allows the user to see what buttons you're pressing.", { client = {} })
 registerprivilege("input.chat", "Input", "Allows the user to see your chat keypresses.", { client = { default = 1 } })
 registerprivilege("input.bindings", "Input", "Allows the user to see your bindings.", { client = { default = 1 } })
-registerprivilege("input.emulate", "Input", "Allows starfall to emulate user input.", { client = { default = 1 } })
+registerprivilege("input.emulate", "Input", "Allows neostarfall to emulate user input.", { client = { default = 1 } })
 
 local controlsLocked = false
 local function unlockControls(instance)
@@ -63,7 +63,7 @@ end
 local function lockControls(instance)
 	instance.data.input.controlsLocked = true
 	controlsLocked = true
-	LocalPlayer():ChatPrint("Starfall locked your controls. Press 'Alt' to regain control.")
+	LocalPlayer():ChatPrint("Neostarfall locked your controls. Press 'Alt' to regain control.")
 
 	hook.Add("PlayerBindPress", "sf_keyboard_blockinput", function(ply, bind, pressed)
 		if bind ~= "+attack" and bind ~= "+attack2" then return true end
