@@ -282,7 +282,7 @@ function PANEL:Setup(folder)
 		node.FileURL = v[2]
 	end
 
-	local examples_url = "https://api.github.com/repos/thegrb93/StarfallEx/contents/lua/starfall/examples"
+	local examples_url = "https://api.github.com/repos/neostarfall/neostarfall/contents/lua/starfall/examples"
 	http.Fetch( examples_url,
 		function( body, len, headers, code )
 			if code == 200 then -- OK code

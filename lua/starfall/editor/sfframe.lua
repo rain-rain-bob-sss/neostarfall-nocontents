@@ -95,8 +95,8 @@ function SF.DefaultCode()
 --[[
 Starfall Scripting Environment
 
-StarfallEx Addon: https://github.com/thegrb93/StarfallEx
-Documentation: http://thegrb93.github.io/StarfallEx
+Neostarfall Addon: https://github.com/neostarfall/neostarfall
+Documentation: http://neostarfall.github.io/neostarfall
 
 This default code can be edited via the 'default.txt' file
 ]]
@@ -928,7 +928,7 @@ function Editor:InitComponents()
 
 		if self.CreditCount == 6 then
 
-		http.Fetch( "https://api.github.com/repos/thegrb93/StarfallEx/contributors",
+		http.Fetch( "https://api.github.com/repos/neostarfall/neostarfall/contributors",
 			function( body, len, headers, code )
 				local data = util.JSONToTable(body)
 
@@ -1314,7 +1314,7 @@ function Editor:CreateThemesPanel()
 	label:SetText("If your theme doesn't work or looks different than it should you can report it by clicking on this text.")
 	label:SetWrap(true)
 	label.DoClick = function()
-		gui.OpenURL( "https://github.com/thegrb93/StarfallEx/issues/307" )
+		gui.OpenURL( "https://github.com/neostarfall/neostarfall/issues" )
 	end
 	return panel
 end

@@ -34,7 +34,7 @@ for _, name in pairs(l) do
 	end
 end
 
-SF.Editor.HelperURL = CreateConVar("sf_editor_helperurl", "http://thegrb93.github.io/StarfallEx/", {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "URL for website used by SF Helper, change to allow custom documentation.")
+SF.Editor.HelperURL = CreateConVar("sf_editor_helperurl", "http://neostarfall.github.io/neostarfall/", {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "URL for website used by SF Helper, change to allow custom documentation.")
 
 ------------------
 -- Editor

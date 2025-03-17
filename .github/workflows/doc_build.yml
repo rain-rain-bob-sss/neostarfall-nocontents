@@ -18,7 +18,7 @@ jobs:
         # Clone docgen branch, run build_docs.sh in order to build sf_doc.json
         - name: Build Docs
           run: |
-            git clone -b docgen --single-branch https://github.com/thegrb93/StarfallEx.git docgen
+            git clone -b docgen --single-branch https://github.com/neostarfall/neostarfall.git docgen
             chmod -R +xrw .
             cd docgen
             . ./build_docs.sh
