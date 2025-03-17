@@ -1,8 +1,8 @@
 ENT.Type            = "anim"
 ENT.Base            = "base_anim"
 
-ENT.PrintName       = "Starfall Hologram"
-ENT.Author          = "Starfall Organization"
+ENT.PrintName       = "Neostarfall Hologram"
+ENT.Author          = "Neostarfall Team"
 
 ENT.Spawnable       = false
 ENT.AdminSpawnable  = false

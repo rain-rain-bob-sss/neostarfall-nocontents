@@ -1,9 +1,9 @@
 timer.Simple(0, function()
 	if util.NetworkStringToID("sf_moneyrequest") ~= 0 then
 		if SERVER then
-			ErrorNoHalt("SF: loganlearner/starfall-darkrp-library is obsolete as StarfallEx now has a built-in DarkRP library. Please uninstall loganlearner/starfall-darkrp-library\n")
+			ErrorNoHalt("SF: loganlearner/starfall-darkrp-library is obsolete as Neostarfall now has a built-in DarkRP library. Please uninstall loganlearner/starfall-darkrp-library\n")
 		else
-			print("SF: This server has loganlearner/starfall-darkrp-library installed, which is obsolete as StarfallEx now has a built-in DarkRP library. The built-in library will be disabled. If you experience any problems with DarkRP-specific code, this might be why!")
+			print("SF: This server has loganlearner/starfall-darkrp-library installed, which is obsolete as Neostarfall now has a built-in DarkRP library. The built-in library will be disabled. If you experience any problems with DarkRP-specific code, this might be why!")
 		end
 	end
 end)

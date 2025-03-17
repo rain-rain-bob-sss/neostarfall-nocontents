@@ -1,9 +1,8 @@
 ENT.Type            = "anim"
 ENT.Base            = "base_gmodentity"
 
-ENT.PrintName       = "Starfall Screen"
-ENT.Author          = "Colonel Thirty Two"
-ENT.Contact         = "initrd.gz@gmail.com"
+ENT.PrintName       = "Neostarfall Screen"
+ENT.Author          = "Neostarfall Team"
 ENT.Purpose         = ""
 ENT.Instructions    = ""
 

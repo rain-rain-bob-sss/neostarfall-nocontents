@@ -1,9 +1,8 @@
 ENT.Type            = "anim"
 ENT.Base            = "base_gmodentity"
 
-ENT.PrintName       = "Starfall"
-ENT.Author          = "Colonel Thirty Two"
-ENT.Contact         = "initrd.gz@gmail.com"
+ENT.PrintName       = "Neostarfall"
+ENT.Author          = "Neostarfall Team"
 ENT.Purpose         = ""
 ENT.Instructions    = ""
 
@@ -162,7 +161,7 @@ local function MenuOpen( ContextMenu, Option, Entity, Trace )
 end
 
 properties.Add( "starfall", {
-	MenuLabel = "StarfallEx",
+	MenuLabel = "Neostarfall",
 	Order = 999,
 	MenuIcon = "icon16/wrench.png", -- We should create an icon
 	Filter = function( self, ent, ply )

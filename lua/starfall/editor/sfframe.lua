@@ -2137,7 +2137,7 @@ vgui.Register( "StarfallUsers", PANEL, "StarfallFrame" )
 local userPanel
 list.Set( "DesktopWindows", "StarfallUsers", {
 
-	title		= "Starfall List",
+	title		= "Neostarfall List",
 	icon		= "radon/starfall2",
 	width		= 520,
 	height		= 700,
@@ -2152,7 +2152,7 @@ concommand.Add("sf_userlist", function()
 	if userPanel and userPanel:IsValid() then return end
 
 	userPanel = vgui.Create("StarfallUsers")
-	userPanel:SetTitle( "Starfall List" )
+	userPanel:SetTitle( "Neostarfall List" )
 	userPanel:SetSize( 520, ScrH()*0.5 )
 	userPanel:SetSizable(true)
 	userPanel:Center()
