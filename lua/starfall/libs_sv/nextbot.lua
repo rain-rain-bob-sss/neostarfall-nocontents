@@ -61,7 +61,7 @@ registerprivilege("nextbot.setClimbAllowed", "Nextbot allow climb", "Allows the 
 registerprivilege("nextbot.setAvoidAllowed", "Nextbot allow avoid", "Allows the user to set whether the nextbot can try to avoid obstacles.", {entities = {}})
 registerprivilege("nextbot.setJumpGapsAllowed", "Nextbot allow jump gaps", "Allows the user to set whether the nextbot can jump gaps.", {entities = {}})
 
-local entList = SF.EntManager("nextbots", "nextbots", 30, "The number of props allowed to spawn via Starfall")
+local entList = SF.EntManager("nextbots", "nextbots", 30, "The number of props allowed to spawn via Neostarfall")
 
 return function(instance)
 local checkpermission = instance.player ~= SF.Superuser and SF.Permissions.check or function() end

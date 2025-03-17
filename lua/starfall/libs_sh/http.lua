@@ -6,7 +6,7 @@ local permission_level = SERVER and 1 or 3
 registerprivilege("http.get", "HTTP Get method", "Allows the user to request html data", { client = {}, urlwhitelist = { default = permission_level } })
 registerprivilege("http.post", "HTTP Post method", "Allows the user to post html data", { client = { default = 1 }, urlwhitelist = { default = permission_level } })
 
-local requests = SF.LimitObject("http_requests", "http request", 3, "The number of concurrent http requests via Starfall")
+local requests = SF.LimitObject("http_requests", "http request", 3, "The number of concurrent http requests via Neostarfall")
 
 --- Http library. Requests content from urls.
 -- @name http

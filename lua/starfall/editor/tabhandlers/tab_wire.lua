@@ -55,12 +55,12 @@ TabHandler.Modes.Text = { SyntaxColorLine = function(self, row) return { { self.
 ---------------------
 TabHandler.Fonts = {} --Font descriptions for settings
 TabHandler.Fonts["Courier New"] = "Font used in expression2 editor"
-TabHandler.Fonts["DejaVu Sans Mono"] = "Default SF Editor font"
+TabHandler.Fonts["DejaVu Sans Mono"] = "Default NSF Editor font"
 TabHandler.Fonts["Consolas"] = ""
 TabHandler.Fonts["Fixedsys"] = ""
 TabHandler.Fonts["Lucida Console"] = ""
 TabHandler.Fonts["Monaco"] = "Mac standard font"
-TabHandler.Fonts["Roboto Mono"] = "Custom Font shipped with starfall"
+TabHandler.Fonts["Roboto Mono"] = "Custom Font shipped with neostarfall"
 TabHandler.Tabs = {}
 local defaultFont = "DejaVu Sans Mono" -- We ship that with starfall, linux has it by default
 

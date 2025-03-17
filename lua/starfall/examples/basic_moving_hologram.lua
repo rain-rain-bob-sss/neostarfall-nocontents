@@ -3,7 +3,6 @@
 --@server
 
 -- Example showcasing basic ways of creating and manipulating a hologram, it's meant for absolute beginners
--- Stuff like variables, function definitions, etc. are explained here: https://github.com/thegrb93/StarfallEx/wiki/Lua-Starfall-Crash-Course
 
 -- Functions from the `builtin` library can be called directly, the following gives us the chip entity
 local c = chip()

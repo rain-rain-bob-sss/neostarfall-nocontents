@@ -1,9 +1,9 @@
 timer.Simple(0, function()
 	if util.NetworkStringToID("sf_moneyrequest") ~= 0 then
 		if SERVER then
-			ErrorNoHalt("SF: loganlearner/starfall-darkrp-library is obsolete as Neostarfall now has a built-in DarkRP library. Please uninstall loganlearner/starfall-darkrp-library\n")
+			ErrorNoHalt("NSF: loganlearner/starfall-darkrp-library is obsolete as Neostarfall now has a built-in DarkRP library. Please uninstall loganlearner/starfall-darkrp-library\n")
 		else
-			print("SF: This server has loganlearner/starfall-darkrp-library installed, which is obsolete as Neostarfall now has a built-in DarkRP library. The built-in library will be disabled. If you experience any problems with DarkRP-specific code, this might be why!")
+			print("NSF: This server has loganlearner/starfall-darkrp-library installed, which is obsolete as Neostarfall now has a built-in DarkRP library. The built-in library will be disabled. If you experience any problems with DarkRP-specific code, this might be why!")
 		end
 	end
 end)
@@ -119,7 +119,7 @@ end
 
 if SERVER then
 	debugCvar = CreateConVar("sf_moneyrequest_verbose_sv", 1, FCVAR_ARCHIVE, "Prints information about money requests to console.", 0, 1)
-	local timeoutCvar = CreateConVar("sf_moneyrequest_timeout", 30, FCVAR_ARCHIVE, "Amount of time in seconds until a StarfallEx money request expires.", 5, 600)
+	local timeoutCvar = CreateConVar("sf_moneyrequest_timeout", 30, FCVAR_ARCHIVE, "Amount of time in seconds until a Neostarfall money request expires.", 5, 600)
 
 	util.AddNetworkString("sf_moneyrequest2")
 	
@@ -138,17 +138,17 @@ if SERVER then
 	function requestClass:accept()
 		local sender, receiver, amount, instance = self.sender, self.receiver, self.amount, self.instance
 		if sender:canAfford(amount) then
-			printDebug("SF: Accepted money request.", self)
+			printDebug("NSF: Accepted money request.", self)
 			DarkRP.payPlayer(sender, receiver, amount)
 			if self.callbackSuccess then
 				instance:runFunction(self.callbackSuccess, self.message, instance.Types.Player.Wrap(sender), amount)
 			end
 		else
-			printDebug("SF: Attempted to accept money request but the sender couldn't afford it.", self)
+			printDebug("NSF: Attempted to accept money request but the sender couldn't afford it.", self)
 		end
 	end
 	function requestClass:decline()
-		printDebug("SF: Declined money request.", self)
+		printDebug("NSF: Declined money request.", self)
 		if self.callbackFailure then
 			self.instance:runFunction(self.callbackFailure, "REQUEST_DENIED")
 		end
@@ -185,7 +185,7 @@ if SERVER then
 		requestsForSender[receiver] = request
 		
 		request:send()
-		printDebug("SF: Sent a money request.", request)
+		printDebug("NSF: Sent a money request.", request)
 	end
 	function manager:think()
 		local now = CurTime()
@@ -194,13 +194,13 @@ if SERVER then
 				for receiver, request in pairs(requestsForPlayer) do
 					if not IsValid(receiver) then
 						self:pop(sender, receiver, true)
-						printDebug("SF: Removed money request because the receiver was invalid.", request)
+						printDebug("NSF: Removed money request because the receiver was invalid.", request)
 						if request.callbackFailure then
 							request.instance:runFunction(request.callbackFailure, "RECEIVER_INVALID")
 						end
 					elseif now >= request.expiry+5 then
 						self:pop(sender, receiver, true)
-						printDebug("SF: Removed money request because it expired.", request)
+						printDebug("NSF: Removed money request because it expired.", request)
 						if request.callbackFailure then
 							request.instance:runFunction(request.callbackFailure, "REQUEST_TIMEOUT")
 						end
@@ -232,7 +232,7 @@ if SERVER then
 		
 		if not request then return end
 		if request.instance and request.instance.error then
-			printDebug("SF: Attempted to pop money request but the instance was dead.", request)
+			printDebug("NSF: Attempted to pop money request but the instance was dead.", request)
 			return
 		end
 		
@@ -278,7 +278,7 @@ if SERVER then
 		else
 			chatPrint(executor, "sf_moneyrequest: no such request")
 		end
-	end, nil, "Accept, decline, or view info about a StarfallEx money request. Usage: sf_moneyrequest <entindex or 0> <accept|decline|info> <request index>", FCVAR_CLIENTCMD_CAN_EXECUTE)
+	end, nil, "Accept, decline, or view info about a Neostarfall money request. Usage: sf_moneyrequest <entindex or 0> <accept|decline|info> <request index>", FCVAR_CLIENTCMD_CAN_EXECUTE)
 else
 	debugCvar = CreateConVar("sf_moneyrequest_verbose_cl", 1, FCVAR_ARCHIVE, "Prints information about money requests to console.", 0, 1)
 
@@ -291,12 +291,12 @@ else
 		local w, h = 350, 250
 		self:SetSize(w, h)
 		self:Center()
-		self:SetTitle("StarfallEx money request")
+		self:SetTitle("Neostarfall money request")
 		self:MakePopup()
 
 		local startTime = SysTime()
 		local desc = vgui.Create("DLabel", self)
-		desc:SetText(string.format("A Starfall processor owned by %q (%s) is asking you for %s. Would you like to send them money?", receiver:GetName(), receiver:SteamID(), DarkRP.formatMoney(amount)))
+		desc:SetText(string.format("A Neostarfall processor owned by %q (%s) is asking you for %s. Would you like to send them money?", receiver:GetName(), receiver:SteamID(), DarkRP.formatMoney(amount)))
 		desc:SetAutoStretchVertical(true)
 		desc:SetWrap(true)
 		desc:Dock(TOP)
@@ -398,15 +398,15 @@ else
 		local request = manager:receive()
 		local receiver, amount, expiry, message = request.receiver, request.amount, request.expiry, request.message
 		if not IsValid(receiver) or amount == 0 or expiry <= CurTime() then
-			printDebug("SF: Ignoring malformed request.", request)
+			printDebug("NSF: Ignoring malformed request.", request)
 		end
-		printDebug("SF: Received money request.", request)
+		printDebug("NSF: Received money request.", request)
 		if SF.BlockedUsers:isBlocked(receiver:SteamID()) then
 			RunConsoleCommand("sf_moneyrequest", 0, "decline", receiver:EntIndex())
-			return printDebug("SF: Ignoring money request because the receiver is in \"SF.BlockedUsers\".", request)
+			return printDebug("NSF: Ignoring money request because the receiver is in \"SF.BlockedUsers\".", request)
 		elseif SF.BlockedMoneyRequests:isBlocked(receiver:SteamID()) then
 			RunConsoleCommand("sf_moneyrequest", 0, "decline", receiver:EntIndex())
-			return printDebug("SF: Ignoring money request because the receiver is in \"SF.BlockedMoneyRequests\".", request)
+			return printDebug("NSF: Ignoring money request because the receiver is in \"SF.BlockedMoneyRequests\".", request)
 		end
 		createMoneyRequestPanel(receiver, amount, expiry, message)
 	end)
@@ -591,7 +591,7 @@ if not DarkRP then return end
 
 if util.NetworkStringToID("sf_moneyrequest") ~= 0 then
 	if CLIENT and instance.player == LocalPlayer() then
-		print("SF: This server has loganlearner/starfall-darkrp-library installed, which is obsolete as StarfallEx now has a built-in DarkRP library. The built-in library will be disabled. If you experience any problems with DarkRP-specific code, this might be why!")
+		print("NSF: This server has loganlearner/starfall-darkrp-library installed, which is obsolete as Neostarfall now has a built-in DarkRP library. The built-in library will be disabled. If you experience any problems with DarkRP-specific code, this might be why!")
 	end
 	return
 end

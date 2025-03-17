@@ -148,7 +148,7 @@ function TOOL:LeftClick(trace)
 			if phys:IsValid() then phys:EnableMotion(false) end
 		end
 
-		undo.Create("Starfall Screen")
+		undo.Create("Neostarfall Screen")
 			undo.AddEntity(sf)
 			if const then undo.AddEntity(const) end
 			undo.SetPlayer(ply)
@@ -179,7 +179,7 @@ function TOOL:LeftClick(trace)
 			if phys:IsValid() then phys:EnableMotion(false) end
 		end
 
-		undo.Create("Starfall HUD")
+		undo.Create("Neostarfall HUD")
 			undo.AddEntity(sf)
 			if const then undo.AddEntity(const) end
 			undo.SetPlayer(ply)
@@ -212,14 +212,14 @@ function TOOL:RightClick(trace)
 
 			SF.LinkEnt(self.Component, ent)
 			self:SetStage(0)
-			SF.AddNotify(ply, "Linked to starfall successfully.", "GENERIC" , 4, "DRIP2")
+			SF.AddNotify(ply, "Linked to neostarfall successfully.", "GENERIC" , 4, "DRIP2")
 			return true
 
 		elseif self.Component:GetClass()=="starfall_hud" and ent:GetClass()=="starfall_processor" then
 
 			SF.LinkEnt(self.Component, ent)
 			self:SetStage(0)
-			SF.AddNotify(ply, "Linked to starfall successfully.", "GENERIC" , 4, "DRIP2")
+			SF.AddNotify(ply, "Linked to neostarfall successfully.", "GENERIC" , 4, "DRIP2")
 			return true
 
 		elseif self.Component:GetClass()=="starfall_hud" and ent:IsVehicle() then

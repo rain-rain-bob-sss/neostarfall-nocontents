@@ -70,9 +70,9 @@ function notification_library.addProgress(id, text, progress)
 
 	--Keep the ID unique to each player
 	if instance.player == SF.Superuser then
-		id = "SF:Superuser"..id
+		id = "NSF:Superuser"..id
 	elseif instance.player:IsValid() then
-		id = "SF:"..instance.player:SteamID64()..id
+		id = "NSF:"..instance.player:SteamID64()..id
 	else
 		SF.Throw("Invalid chip owner", 2)
 	end
@@ -91,7 +91,7 @@ function notification_library.kill(id)
 	end
 	checkluatype(id, TYPE_STRING)
 
-	id = "SF:"..instance.player:SteamID64()..id
+	id = "NSF:"..instance.player:SteamID64()..id
 
 	if notifications[id] then
 		notification.Kill( id )

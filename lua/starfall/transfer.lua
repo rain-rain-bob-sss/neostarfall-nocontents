@@ -23,11 +23,11 @@ function net.ReadStarfall(ply, callback)
 		callback(true, sfdata)
 	end
 	local function setupProc(e)
-		if e==nil then error="Invalid starfall processor entity" end
+		if e==nil then error="Invalid neostarfall processor entity" end
 		sfdata.proc=e setup()
 	end
 	local function setupOwner(e)
-		if e==nil then error="Invalid starfall owner entity" end
+		if e==nil then error="Invalid neostarfall owner entity" end
 		sfdata.owner=e setup()
 	end
 	local function setupFiles(data)
@@ -82,7 +82,7 @@ end
 -- Legacy decoder
 function SF.DecompressFiles(data)
 	data = util.Decompress(data)
-	if not data or #data < 8 then error("Error decompressing starfall data!") end
+	if not data or #data < 8 then error("Error decompressing neostarfall data!") end
 	local buff = SF.StringStream(data, 5)
 	local headers = {}
 	for i=1, buff:readUInt32() do
@@ -177,7 +177,7 @@ if SERVER then
 	net.Receive("starfall_upload", function(len, ply)
 		local updata = uploaddata[ply]
 		if not updata or updata.reading then
-			ErrorNoHalt("SF: Player "..ply:GetName().." tried to upload code without being requested.\n")
+			ErrorNoHalt("NSF: Player "..ply:GetName().." tried to upload code without being requested.\n")
 			return
 		end
 

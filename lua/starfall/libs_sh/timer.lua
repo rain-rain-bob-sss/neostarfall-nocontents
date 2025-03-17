@@ -2,7 +2,7 @@
 local checkluatype = SF.CheckLuaType
 local timer = timer
 
-local timer_count = SF.LimitObject("timer", "timer", 200, "The number of concurrent starfall timers")
+local timer_count = SF.LimitObject("timer", "timer", 200, "The number of concurrent neostarfall timers")
 
 
 --- Deals with time and timers.

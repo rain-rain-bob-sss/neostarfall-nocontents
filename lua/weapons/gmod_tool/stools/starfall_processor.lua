@@ -79,7 +79,7 @@ else
 					-- Add mainfile last so it gets focus
 					SF.Editor.openWithCode(sfdata.mainfile, mainfile, nil, false)
 				else
-					SF.AddNotify(LocalPlayer(), "Error downloading SF code. (" .. err .. ")", "ERROR", 7, "ERROR1")
+					SF.AddNotify(LocalPlayer(), "Error downloading NSF code. (" .. err .. ")", "ERROR", 7, "ERROR1")
 				end
 			end)
 		end
@@ -119,7 +119,7 @@ function TOOL:LeftClick(trace)
 		if not (sf and sf:IsValid()) then return end -- Probably removed during transfer
 		sf:Compile(sfdata)
 	end) then
-		SF.AddNotify(ply, "Cannot upload SF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
+		SF.AddNotify(ply, "Cannot upload NSF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
 		return false
 	end
 
@@ -146,7 +146,7 @@ function TOOL:LeftClick(trace)
 		sf:SetPos(trace.HitPos - trace.HitNormal * min.z)
 		local const = doWeld()
 
-		undo.Create("Starfall Processor")
+		undo.Create("Neostarfall Processor")
 			undo.AddEntity(sf)
 			undo.AddEntity(const)
 			undo.SetPlayer(ply)
@@ -301,7 +301,7 @@ if CLIENT then
 
 		local docbutton = vgui.Create("DButton" , panel)
 		panel:AddPanel(docbutton)
-		docbutton:SetText("Starfall Documentation")
+		docbutton:SetText("Neostarfall Documentation")
 		docbutton.DoClick = GotoDocs
 
 		local filebrowser = vgui.Create("StarfallFileBrowser")

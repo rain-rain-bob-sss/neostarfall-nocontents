@@ -3,7 +3,7 @@ local checkluatype = SF.CheckLuaType
 local PLY_META = FindMetaTable("Player")
 
 if CLIENT then
-	SF.Permissions.registerPrivilege("convar", "Read ConVars", "Allows Starfall to read your game settings", { client = {} })
+	SF.Permissions.registerPrivilege("convar", "Read ConVars", "Allows Neostarfall to read your game settings", { client = {} })
 end
 
 

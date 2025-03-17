@@ -12,17 +12,17 @@ if SERVER then
 	SF.cpuQuota = CreateConVar("sf_timebuffer", 0.005, FCVAR_ARCHIVE, "The max average the CPU time can reach.")
 	SF.cpuBufferN = CreateConVar("sf_timebuffersize", 100, FCVAR_ARCHIVE, "The window width of the CPU time quota moving average.")
 	SF.softLockProtection = CreateConVar("sf_timebuffersoftlock", 1, FCVAR_ARCHIVE, "Consumes more cpu, but protects from freezing the game. Only turn this off if you want to use a profiler on your scripts.")
-	SF.RamCap = CreateConVar("sf_ram_max", 1500000, FCVAR_ARCHIVE, "If ram exceeds this limit (in kB), starfalls will be terminated")
-	SF.AllowSuperUser = CreateConVar("sf_superuserallowed", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether the starfall superuser feature is allowed")
+	SF.RamCap = CreateConVar("sf_ram_max", 1500000, FCVAR_ARCHIVE, "If ram exceeds this limit (in kB), neostarfalls will be terminated")
+	SF.AllowSuperUser = CreateConVar("sf_superuserallowed", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether the neostarfall superuser feature is allowed")
 else
 	SF.cpuQuota = CreateConVar("sf_timebuffer_cl", 0.006, FCVAR_ARCHIVE, "The max average the CPU time can reach.")
 	SF.cpuOwnerQuota = CreateConVar("sf_timebuffer_cl_owner", 0.015, FCVAR_ARCHIVE, "The max average the CPU time can reach for your own chips.")
 	SF.cpuBufferN = CreateConVar("sf_timebuffersize_cl", 100, FCVAR_ARCHIVE, "The window width of the CPU time quota moving average.")
 	SF.softLockProtection = CreateConVar("sf_timebuffersoftlock_cl", 1, FCVAR_ARCHIVE, "Consumes more cpu, but protects from freezing the game. Only turn this off if you want to use a profiler on your scripts.")
 	SF.softLockProtectionOwner = CreateConVar("sf_timebuffersoftlock_cl_owner", 1, FCVAR_ARCHIVE, "If sf_timebuffersoftlock_cl is 0, this enabled will make it only your own chips will be affected.")
-	SF.RamCap = CreateConVar("sf_ram_max_cl", 1500000, FCVAR_ARCHIVE, "If ram exceeds this limit (in kB), starfalls will be terminated")
-	SF.AllowSuperUser = CreateConVar("sf_superuserallowed", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether the starfall superuser feature is allowed")
-	SF.CvarEnabled = CreateConVar( "sf_enabled_cl", "1", { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, "Enable clientside starfall" )
+	SF.RamCap = CreateConVar("sf_ram_max_cl", 1500000, FCVAR_ARCHIVE, "If ram exceeds this limit (in kB), neostarfalls will be terminated")
+	SF.AllowSuperUser = CreateConVar("sf_superuserallowed", 0, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether the neostarfall superuser feature is allowed")
+	SF.CvarEnabled = CreateConVar( "sf_enabled_cl", "1", { FCVAR_ARCHIVE, FCVAR_USERINFO, FCVAR_DONTRECORD }, "Enable clientside neostarfall" )
 end
 local ramlimit = SF.RamCap:GetInt()
 cvars.AddChangeCallback(SF.RamCap:GetName(), function() ramlimit = SF.RamCap:GetInt() end)
@@ -94,7 +94,7 @@ function SF.Instance.Compile(code, mainfile, player, entity)
 			instance:setCheckCpu(SF.softLockProtection:GetBool())
 		else
 			if SF.BlockedUsers:isBlocked(player:SteamID()) then
-				return false, { message = "User has blocked this player's starfalls", traceback = "" }
+				return false, { message = "User has blocked this player's neostarfalls", traceback = "" }
 			end
 			instance:setCheckCpu(SF.softLockProtection:GetBool() or (SF.softLockProtectionOwner:GetBool() and LocalPlayer() ~= player))
 		end
@@ -134,7 +134,7 @@ function SF.Instance.Compile(code, mainfile, player, entity)
 		local serverorclient = fdata.serverorclient
 		if (serverorclient == "server" and CLIENT) or (serverorclient == "client" and SERVER) then continue end -- Don't compile files for other realm
 
-		local func = SF.CompileString(fdata.code, "SF:"..filename, false)
+		local func = SF.CompileString(fdata.code, "NSF:"..filename, false)
 		if isstring(func) then
 			return false, { message = func, traceback = "" }
 		end
@@ -434,9 +434,9 @@ end
 SF.runningOps = false
 
 local function safeThrow(self, msg, nocatch, force)
-	if force or string.find(debug.getinfo(3, "S").short_src, "SF:", 1, true) then
+	if force or string.find(debug.getinfo(3, "S").short_src, "NSF:", 1, true) then
 		if SERVER and nocatch then
-			local consolemsg = "[Starfall] CPU usage exceeded!"
+			local consolemsg = "[Neostarfall] CPU usage exceeded!"
 			if self.player:IsValid() then
 				consolemsg = consolemsg .. " by " .. self.player:Nick() .. " (" .. self.player:SteamID() .. ")"
 			end
@@ -672,7 +672,7 @@ hook.Add("Think", "SF_Think", function()
 	if SF.runningOps then
 		SF.runningOps = false
 		SF.OnRunningOps(false)
-		ErrorNoHalt("[Starfall] ERROR: This should not happen, bad addons?\n")
+		ErrorNoHalt("[Neostarfall] ERROR: This should not happen, bad addons?\n")
 	end
 
 	for pl, insts in pairs(SF.playerInstances) do
@@ -696,7 +696,7 @@ hook.Add("Think", "SF_Think", function()
 			end
 
 			if maxinst then
-				maxinst:Error(SF.MakeError("SF: Player cpu time limit reached!", 1))
+				maxinst:Error(SF.MakeError("NSF: Player cpu time limit reached!", 1))
 			end
 		end
 	end

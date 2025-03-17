@@ -283,13 +283,13 @@ else
 			local enabledBy = IsValid(chip.owner) and (" by "..chip.owner:Nick()) or ""
 			if enabled then
 				if (Hint_FirstPrint) then
-					LocalPlayer():ChatPrint("Starfall HUD enabled"..enabledBy..". NOTE: Type 'sf_hud_unlink' in the console to disconnect yourself from all HUDs.")
+					LocalPlayer():ChatPrint("Neostarfall HUD enabled"..enabledBy..". NOTE: Type 'sf_hud_unlink' in the console to disconnect yourself from all HUDs.")
 					Hint_FirstPrint = nil
 				else
-					LocalPlayer():ChatPrint("Starfall HUD enabled"..enabledBy..".")
+					LocalPlayer():ChatPrint("Neostarfall HUD enabled"..enabledBy..".")
 				end
 			else
-				LocalPlayer():ChatPrint("Starfall HUD disconnected"..enabledBy..".")
+				LocalPlayer():ChatPrint("Neostarfall HUD disconnected"..enabledBy..".")
 			end
 			runHudHooks(ply, chip, activator, enabled)
 			if not dontsync then syncHud(ply, chip, activator, enabled) end
@@ -308,7 +308,7 @@ else
 				end
 			end
 		end
-		ply:ChatPrint("Disconnected from all Starfall HUDs.")
+		ply:ChatPrint("Disconnected from all Neostarfall HUDs.")
 	end)
 end
 

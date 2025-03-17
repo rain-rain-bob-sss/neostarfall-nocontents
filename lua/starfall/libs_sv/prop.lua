@@ -10,7 +10,7 @@ registerprivilege("prop.createRagdoll", "Create a ragdoll", "Allows the user to 
 registerprivilege("prop.createCustom", "Create custom prop", "Allows the user to create custom props")
 
 
-local entList = SF.EntManager("props", "props", -1, "The number of props allowed to spawn via Starfall")
+local entList = SF.EntManager("props", "props", -1, "The number of props allowed to spawn via neostarfall")
 local plyPropBurst = SF.BurstObject("props", "props", 4, 4, "Rate props can be spawned per second.", "Number of props that can be spawned in a short time.")
 
 local maxCustomSize = CreateConVar("sf_props_custom_maxsize", "2048", FCVAR_ARCHIVE, "The max hull size of a custom prop")
@@ -242,7 +242,7 @@ function props_library.createCustom(pos, ang, vertices, frozen)
 			undo.Create("Prop")
 				undo.SetPlayer(ply)
 				undo.AddEntity(propent)
-			undo.Finish("Starfall Prop")
+			undo.Finish("Neostarfall Prop")
 		end
 		ply:AddCleanup("props", propent)
 	end

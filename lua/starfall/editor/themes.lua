@@ -93,7 +93,7 @@ function SF.Editor.Themes.SwitchTheme(name)
 	end
 	if theme.Version ~= themeformat_version then
 		SF.Editor.Themes.SwitchTheme("default")
-		print("Theme "..name.." isnt compatibile with this starfall version, you have to reimport it!")
+		print("Theme "..name.." isnt compatibile with this Neostarfall version, you have to reimport it!")
 		return
 	end
 	for k, v in pairs(SF.Editor.Themes.Themes.default) do
