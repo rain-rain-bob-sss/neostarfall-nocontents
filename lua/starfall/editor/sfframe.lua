@@ -77,8 +77,8 @@ Editor.OpenOldTabsVar = CreateClientConVar("sf_editor_openoldtabs", "1", true, f
 Editor.WorldClickerVar = CreateClientConVar("sf_editor_worldclicker", "0", true, false)
 Editor.LayoutVar = CreateClientConVar("sf_editor_layout", "0", true, false)
 Editor.StartHelperUndocked = CreateClientConVar("sf_helper_startundocked", "0", true, false)
-Editor.EditorFileAutoReload = CreateClientConVar("sf_editor_file_auto_reload", "0", true, false, "Controls the auto reload functionality ofneostarfalls Editor")
-Editor.EditorFileAutoReloadInterval = CreateClientConVar("sf_editor_file_auto_reload_interval", "1", true, false, "Controls the polling interval of the auto reload functionality ofneostarfalls Editor")
+Editor.EditorFileAutoReload = CreateClientConVar("sf_editor_file_auto_reload", "0", true, false, "Controls the auto reload functionality of Neostarfall's Editor")
+Editor.EditorFileAutoReloadInterval = CreateClientConVar("sf_editor_file_auto_reload_interval", "1", true, false, "Controls the polling interval of the auto reload functionality of Neostarfall's Editor")
 
 function SF.DefaultCode()
 	if file.Exists("starfall/default.txt", "DATA") then
