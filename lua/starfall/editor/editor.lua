@@ -55,7 +55,7 @@ if CLIENT then
 	-- Colors
 	SF.Editor.colors = {}
 	SF.Editor.colors.brandHSV = {39, 0.96, 0.97} -- Neostarfall's branding color expressed in HSV
-	SF.Editor.colors.dark = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2] * 0.8, SF.Editor.colors.brandHSV[3] * 0.15)
+	SF.Editor.colors.dark = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2] * 0.6, SF.Editor.colors.brandHSV[3] * 0.15)
 	SF.Editor.colors.meddark = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2] * 0.9, SF.Editor.colors.brandHSV[3] * 0.3)
 	SF.Editor.colors.med = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2], SF.Editor.colors.brandHSV[3] * 0.4)
 	SF.Editor.colors.medlight = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2], SF.Editor.colors.brandHSV[3] * 0.6)
