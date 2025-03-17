@@ -54,11 +54,12 @@ if CLIENT then
 
 	-- Colors
 	SF.Editor.colors = {}
-	SF.Editor.colors.dark = Color(48, 32, 0)
-	SF.Editor.colors.meddark = Color(79, 53, 0)
-	SF.Editor.colors.med = Color(110, 75, 4)
-	SF.Editor.colors.medlight = Color(163, 113, 11)
-	SF.Editor.colors.light = Color(214, 147, 9)
+	SF.Editor.colors.brandHSV = {39, 0.96, 0.97} -- Neostarfall's branding color expressed in HSV
+	SF.Editor.colors.dark = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2] * 0.6, SF.Editor.colors.brandHSV[3] * 0.15)
+	SF.Editor.colors.meddark = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2] * 0.9, SF.Editor.colors.brandHSV[3] * 0.3)
+	SF.Editor.colors.med = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2], SF.Editor.colors.brandHSV[3] * 0.4)
+	SF.Editor.colors.medlight = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2], SF.Editor.colors.brandHSV[3] * 0.6)
+	SF.Editor.colors.light = HSVToColor(SF.Editor.colors.brandHSV[1], SF.Editor.colors.brandHSV[2], SF.Editor.colors.brandHSV[3] * 0.9)
 
 	function SF.Editor.init()
 		if SF.Editor.initialized or SF.Editor.editor then return end
