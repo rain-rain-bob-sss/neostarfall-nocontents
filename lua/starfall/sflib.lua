@@ -21,11 +21,21 @@ function Ent_SetParent(x,y) Ent_SetParent=ENT_META.SetParent return Ent_SetParen
 local Ply_IsSuperAdmin,Ply_Nick,Ply_PrintMessage,Ply_SteamID = PLY_META.IsSuperAdmin,PLY_META.Nick,PLY_META.PrintMessage,PLY_META.SteamID
 
 local prometheus = include("starfall/thirdparty/prometheus/wrapper.lua")
-function SF.ObfuscateCode(code)
-    prometheus.Logger.LogLevel = prometheus.Logger.LogLevel.Error
-    local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Strong)
+prometheus.Logger.LogLevel = prometheus.Logger.LogLevel.Error
 
-    return pipeline:apply(code)
+function SF.ObfuscateCode(code)
+    local lines = code:Split("\n")
+    local directives = {}
+
+    for _, line in ipairs(lines) do
+        line = line:Trim()
+        if line:StartsWith("--@") then
+            directives[#directives+1] = line
+        end
+    end
+
+    local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Weak)
+    return table.concat(directives, "\n") .. "\n" .. pipeline:apply(code)
 end
 
 -- Make sure this is done after metatables have been set

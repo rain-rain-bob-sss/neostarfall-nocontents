@@ -56,6 +56,7 @@ end
 
 function net.WriteStarfall(sfdata, callback)
 	if #sfdata.mainfile > 255 then error("Main file name too large: " .. #sfdata.mainfile .. " (max is 255)") end
+
 	if SERVER then
 		if IsValid(sfdata.proc) then
 			net.WriteBool(true)
@@ -71,7 +72,6 @@ function net.WriteStarfall(sfdata, callback)
 		end
 	end
 
-	PrintTable(sfdata)
 	net.WriteString(sfdata.mainfile)
 
 	if sfdata.compressed then
@@ -250,7 +250,6 @@ else
 		net.SendToServer()
 	end
 
-	
 	function SF.SendError(chip, message, traceback)
 		local owner, is_blocked = chip.owner, false
 		if IsValid(owner) then

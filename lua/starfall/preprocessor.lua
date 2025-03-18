@@ -47,10 +47,7 @@ SF.PreprocessData = {
 		clientmain = function(self, args) self.clientmain = args end,
 		superuser = function(self, args) self.superuser = true end,
 		owneronly = function(self, args) self.owneronly = true end,
-		obfuscate = function(self, args)
-		    if #args == 0 then return "Empty obfuscate directive" end
-		    self.obfuscate = args
-		end,
+		obfuscate = function(self, args) self.obfuscate = true end,
 	},
 	__index = {
 		FindError = function(self, err, args)
@@ -124,6 +121,10 @@ SF.Preprocessor = {
 						"--@server",
 						""
 					}, "\n")
+				end
+
+				if fdata.obfuscate then
+				    files[path] = SF.ObfuscateCode(files[path])
 				end
 			end
 
