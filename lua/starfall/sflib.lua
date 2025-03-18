@@ -38,7 +38,7 @@ end
 
 function SF.ObfuscateCode(code)
     local directives = getDirectives(code)
-    local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Weak)
+    local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Medium)
     return table.concat(directives, "\n") .. "\n" .. pipeline:apply(code)
 end
 
