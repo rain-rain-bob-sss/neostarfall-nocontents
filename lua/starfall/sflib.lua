@@ -20,6 +20,14 @@ function Ent_SetParent(x,y) Ent_SetParent=ENT_META.SetParent return Ent_SetParen
 
 local Ply_IsSuperAdmin,Ply_Nick,Ply_PrintMessage,Ply_SteamID = PLY_META.IsSuperAdmin,PLY_META.Nick,PLY_META.PrintMessage,PLY_META.SteamID
 
+local prometheus = include("starfall/thirdparty/prometheus/wrapper.lua")
+function SF.ObfuscateCode(code)
+    prometheus.Logger.LogLevel = prometheus.Logger.LogLevel.Error
+    local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Strong)
+
+    return pipeline:apply(code)
+end
+
 -- Make sure this is done after metatables have been set
 hook.Add("InitPostEntity","SF_SanitizeTypeMetatables",function()
 	local function sanitizeTypeMeta(theType, myMeta)
