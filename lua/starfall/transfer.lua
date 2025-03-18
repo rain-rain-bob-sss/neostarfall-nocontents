@@ -72,6 +72,7 @@ function net.WriteStarfall(sfdata, callback)
 		end
 	end
 
+    PrintTable(sfdata)
 	net.WriteString(sfdata.mainfile)
 
 	if sfdata.compressed then

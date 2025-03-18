@@ -2,6 +2,7 @@
 -- SF Preprocessor.
 -- Processes code for compile time directives.
 -------------------------------------------------------------------------------
+local minifyAllScripts = CreateConVar("sf_minify_all_scripts", "1", FCVAR_ARCHIVE, "Minify all scripts on server-to-client transmission", 0, 1)
 
 SF.PreprocessData = {
 	directives = {
@@ -123,9 +124,16 @@ SF.Preprocessor = {
 					}, "\n")
 				end
 
+                local originalCode = files[path]
 				if fdata.obfuscate then
 				    files[path] = SF.ObfuscateCode(files[path])
-				end
+				elseif minifyAllScripts:GetBool() then
+                    files[path] = SF.MinifyCode(files[path])
+                    if #originalCode - #files[path] < 0 then
+                        -- revert to original code if minification is larger, which can happen in certain cases
+                        files[path] = originalCode
+                    end
+                end
 			end
 
 			if ownersenddata then

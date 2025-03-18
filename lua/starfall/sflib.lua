@@ -19,11 +19,10 @@ local function Ent_IsWeapon(ent) return dgetmeta(ent)==WEP_META end
 function Ent_SetParent(x,y) Ent_SetParent=ENT_META.SetParent return Ent_SetParent(x,y) end
 
 local Ply_IsSuperAdmin,Ply_Nick,Ply_PrintMessage,Ply_SteamID = PLY_META.IsSuperAdmin,PLY_META.Nick,PLY_META.PrintMessage,PLY_META.SteamID
-
 local prometheus = include("starfall/thirdparty/prometheus/wrapper.lua")
 prometheus.Logger.LogLevel = prometheus.Logger.LogLevel.Error
 
-function SF.ObfuscateCode(code)
+local function getDirectives(code)
     local lines = code:Split("\n")
     local directives = {}
 
@@ -34,7 +33,18 @@ function SF.ObfuscateCode(code)
         end
     end
 
+    return directives
+end
+
+function SF.ObfuscateCode(code)
+    local directives = getDirectives(code)
     local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Weak)
+    return table.concat(directives, "\n") .. "\n" .. pipeline:apply(code)
+end
+
+function SF.MinifyCode(code)
+    local directives = getDirectives(code)
+    local pipeline = prometheus.Pipeline:fromConfig(prometheus.Presets.Minify)
     return table.concat(directives, "\n") .. "\n" .. pipeline:apply(code)
 end
 
