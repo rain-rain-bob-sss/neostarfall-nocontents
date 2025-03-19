@@ -113,6 +113,8 @@ SF.Preprocessor = {
 
 			local files = {} for k, v in pairs(sfdata.files) do files[k] = v end
 
+            local isMainFileObfuscated = sfdata.mainfile and self.files[sfdata.mainfile].obfuscate
+
 			for path, fdata in pairs(self.files) do
 				if fdata.owneronly then ownersenddata = true end
 				if fdata.serverorclient == "server" then
@@ -125,7 +127,7 @@ SF.Preprocessor = {
 				end
 
                 local originalCode = files[path]
-				if fdata.obfuscate then
+				if fdata.obfuscate or isMainFileObfuscated then
 				    files[path] = SF.ObfuscateCode(files[path])
 				elseif minifyAllScripts:GetBool() then
                     files[path] = SF.MinifyCode(files[path])
