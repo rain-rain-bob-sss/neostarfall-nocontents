@@ -96,6 +96,10 @@ function TOOL:LeftClick(trace)
 	local ent = trace.Entity
 	local sf
 
+    if not SF.CanPlayerCanCompile(ply) then
+        return
+    end
+
 	local function doWeld()
 		if sf==ent then return end
 		local ret
@@ -167,6 +171,10 @@ function TOOL:Reload(trace)
 
 	if sf:IsValid() and sf:GetClass() == "starfall_processor" and sf.sfdata then
 		if CLIENT then return true end
+
+        if not SF.CanPlayerCanCompile(ply) then
+            return
+        end
 
 		if not SF.RequestCode(ply, function(sfdata)
 			if not sf:IsValid() then return end -- Probably removed during transfer

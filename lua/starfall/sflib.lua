@@ -230,6 +230,15 @@ SF.BurstObject = {
 			end
 			obj.val = new
 		end,
+		useNoThrow = function(self, ply, amount)
+            local obj = self:get(ply)
+            local new = self:calc(obj) - amount
+            if new < 0 and ply~=SF.Superuser then
+                return false
+            end
+            obj.val = new
+            return true
+        end,
 		check = function(self, ply)
 			local obj = self:get(ply)
 			obj.val = self:calc(obj)
@@ -270,6 +279,17 @@ SF.BurstObject = {
 	end
 }
 setmetatable(SF.BurstObject, SF.BurstObject)
+
+SF.PlayerCompileBurst = SF.BurstObject("compile", "compile", 3, 1, "The rate at which the burst regenerates per second.", "The number of processors allowed to be compiled in a short interval of time via the toolgun and upload pushes ( burst )")
+
+function SF.CanPlayerCanCompile(ply)
+    if not SF.PlayerCompileBurst:useNoThrow(ply, 1) then
+        SF.AddNotify(ply, "You are compiling processors too quickly, please wait a moment.", "ERROR", 7, "ERROR1")
+        return SF.PlayerCompileBurst:useNoThrow(ply, 1)
+    end
+
+    return true
+end
 
 --- Returns a class that limits the number of something per player
 SF.LimitObject = {

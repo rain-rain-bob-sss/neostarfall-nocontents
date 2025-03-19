@@ -226,11 +226,15 @@ if SERVER then
 
 			if not (IsValid(sf) and sf:GetClass() == "starfall_processor" and sf.sfdata) then return end
 			if sf.sfdata.mainfile ~= sfdata.mainfile or sf.sfdata.owner ~= ply then return end
+
+			if not SF.CanPlayerCanCompile(ply) then
+			    return
+			end
+
 			sfdata.owner = ply
 			sf:Compile(sfdata)
 		end)
 	end)
-
 else
 
 	-- Sends starfall files to server
