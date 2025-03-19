@@ -96,10 +96,6 @@ function TOOL:LeftClick(trace)
 	local ent = trace.Entity
 	local sf
 
-    if not SF.CanPlayerCanCompile(ply) then
-        return
-    end
-
 	local function doWeld()
 		if sf==ent then return end
 		local ret
@@ -121,7 +117,7 @@ function TOOL:LeftClick(trace)
 
 	if not SF.RequestCode(ply, function(sfdata)
 		if not (sf and sf:IsValid()) then return end -- Probably removed during transfer
-		sf:Compile(sfdata)
+		return SF.TryCompile(ply, sf, sfdata)
 	end) then
 		SF.AddNotify(ply, "Cannot upload NSF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
 		return false
@@ -172,16 +168,17 @@ function TOOL:Reload(trace)
 	if sf:IsValid() and sf:GetClass() == "starfall_processor" and sf.sfdata then
 		if CLIENT then return true end
 
-        if not SF.CanPlayerCanCompile(ply) then
-            return
-        end
-
+        local failedToCompile = false
 		if not SF.RequestCode(ply, function(sfdata)
 			if not sf:IsValid() then return end -- Probably removed during transfer
-			sf:Compile(sfdata)
+			failedToCompile = not SF.TryCompile(ply, sf, sfdata) -- returning false would indicate transfer failure and not compile failure
 		end, sf.sfdata.mainfile) then
 			SF.AddNotify(ply, "Cannot upload SF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
 		end
+
+        if failedToCompile then
+            return false
+        end
 
 		return true
 	else
