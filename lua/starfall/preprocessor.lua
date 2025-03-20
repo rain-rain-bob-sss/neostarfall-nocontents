@@ -66,9 +66,10 @@ SF.PreprocessData = {
 				end
 			end
 
-			for whole, arg in string.gmatch(self.code, "(require%(['\"](%S*)['\"]%))") do
-				if #arg == 0 then error("In file " .. self.path .. ":" .. self:FindError(whole) .. ", Empty require string") end
-				self.includes[#self.includes + 1] = arg
+			for arg in string.gmatch(self.code, "require%(['\"](%S*)['\"]%)") do
+				if #arg > 0 and file.Exists("starfall/" .. arg, "DATA") then
+					self.includes[#self.includes + 1] = arg
+				end
 			end
 		end,
 		Postprocess = function(self, processor)
