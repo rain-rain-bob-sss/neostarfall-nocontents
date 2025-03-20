@@ -272,9 +272,23 @@ SF.BurstObject = {
 setmetatable(SF.BurstObject, SF.BurstObject)
 
 SF.PlayerCompileBurst = SF.BurstObject("compile", "compile", 3, 1, "The rate at which the burst regenerates per second.", "The number of processors allowed to be compiled in a short interval of time via the toolgun and upload pushes ( burst )")
+SF.MaxCompileLength = CreateConVar("sf_max_compile_length", "32768", FCVAR_ARCHIVE, "The maximum length of an unobfuscated Neostarfall file.")
+SF.MaxObfuscatedCompileLength = CreateConVar("sf_max_obfuscated_compile_length", "16384", FCVAR_ARCHIVE, "The maximum length of an obfuscated Neostarfall file.")
 
 function SF.TryCompile(player, sf, sfdata)
     if SF.PlayerCompileBurst:check(player) >= 1 then
+        if sfdata.files then
+            for path, code in pairs(sfdata.files) do
+                local isObfuscated = code:find("-@obfuscate")
+                local maxLength = isObfuscated and SF.MaxObfuscatedCompileLength:GetInt() or SF.MaxCompileLength:GetInt()
+
+                if #code > maxLength then
+                    SF.AddNotify(player, ("File %s is too long! (%d chars, %d maximum)"):format(path, #code, maxLength), "ERROR", 7, "ERROR1")
+                    return false
+                end
+            end
+        end
+
         SF.PlayerCompileBurst:use(player, 1)
         sf:Compile(sfdata)
         return true

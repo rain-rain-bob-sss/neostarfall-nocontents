@@ -115,13 +115,18 @@ function TOOL:LeftClick(trace)
 		return ret
 	end
 
+    local failedToCompile = false
 	if not SF.RequestCode(ply, function(sfdata)
 		if not (sf and sf:IsValid()) then return end -- Probably removed during transfer
-		return SF.TryCompile(ply, sf, sfdata)
+		failedToCompile = SF.TryCompile(ply, sf, sfdata)
 	end) then
 		SF.AddNotify(ply, "Cannot upload NSF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
 		return false
 	end
+
+	if failedToCompile then
+        return false
+    end
 
 	if ent:IsValid() and ent:GetClass() == "starfall_processor" then
 		sf = ent
@@ -173,7 +178,7 @@ function TOOL:Reload(trace)
 			if not sf:IsValid() then return end -- Probably removed during transfer
 			failedToCompile = not SF.TryCompile(ply, sf, sfdata) -- returning false would indicate transfer failure and not compile failure
 		end, sf.sfdata.mainfile) then
-			SF.AddNotify(ply, "Cannot upload SF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
+			SF.AddNotify(ply, "Cannot upload NSF code, please wait for the current upload to finish.", "ERROR", 7, "ERROR1")
 		end
 
         if failedToCompile then
