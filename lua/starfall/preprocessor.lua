@@ -2,6 +2,7 @@
 -- SF Preprocessor.
 -- Processes code for compile time directives.
 -------------------------------------------------------------------------------
+local minifyAllScripts = CreateConVar("sf_minify_all_scripts", "1", FCVAR_ARCHIVE, "Minify all scripts on server-to-client transmission", 0, 1)
 
 SF.PreprocessData = {
 	directives = {
@@ -47,6 +48,7 @@ SF.PreprocessData = {
 		clientmain = function(self, args) self.clientmain = args end,
 		superuser = function(self, _) self.superuser = true end,
 		owneronly = function(self, _) self.owneronly = true end,
+		obfuscate = function(self, _) self.obfuscate = true end,
 	},
 	__index = {
 		FindError = function(self, args)
@@ -117,6 +119,8 @@ SF.Preprocessor = {
 
 			local files = {} for k, v in pairs(sfdata.files) do files[k] = v end
 
+            local isMainFileObfuscated = sfdata.mainfile and self.files[sfdata.mainfile].obfuscate
+
 			for path, fdata in pairs(self.files) do
 				if fdata.owneronly then ownersenddata = true end
 				if fdata.serverorclient == "server" then
@@ -127,6 +131,17 @@ SF.Preprocessor = {
 						""
 					}, "\n")
 				end
+
+                local originalCode = files[path]
+				if fdata.obfuscate or isMainFileObfuscated then
+				    files[path] = SF.ObfuscateCode(files[path])
+				elseif minifyAllScripts:GetBool() then
+                    files[path] = SF.MinifyCode(files[path])
+                    if #originalCode - #files[path] < 0 then
+                        -- revert to original code if minification is larger, which can happen in certain cases
+                        files[path] = originalCode
+                    end
+                end
 			end
 
 			if ownersenddata then
