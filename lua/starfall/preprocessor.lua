@@ -8,6 +8,11 @@ SF.PreprocessData = {
 	directives = {
 		include = function(self, args)
 			if #args == 0 then return "Empty include directive" end
+
+			if table.HasValue(self.includes, args) then
+				return "Duplicate include directive: " .. args
+			end
+
 			if string.match(args, "^https?://") then
 				-- HTTP approach
 				local httpUrl, httpName = string.match(args, "^(.+)%s+as%s+(.+)$")
@@ -21,12 +26,22 @@ SF.PreprocessData = {
 
 		includedata = function(self, args)
 			if #args == 0 then return "Empty includedata directive" end
+
+			if table.HasValue(self.includesdata, args) then
+				return "Duplicate includesdata directive: " .. args
+			end
+
 			self.includesdata[#self.includesdata + 1] = args
 			SF.PreprocessData.directives.include(self, args)
 		end,
 
 		includedir = function(self, args)
 			if #args == 0 then return "Empty includedir directive" end
+
+			if table.HasValue(self.includesdata, args) then
+				return "Duplicate includedir directive: " .. args
+			end
+
 			self.includedirs[#self.includedirs + 1] = args
 		end,
 
@@ -69,9 +84,24 @@ SF.PreprocessData = {
 			end
 
 			for arg in string.gmatch(self.code, "require%(['\"](%S*)['\"]%)") do
-				if #arg > 0 and file.Exists("starfall/" .. arg, "DATA") then
-					self.includes[#self.includes + 1] = arg
+				if #arg <= 0 then
+					goto skip
 				end
+
+				for _, v in ipairs { self.includes, self.includedirs, self.includesdata, self.httpincludes } do
+					if table.HasValue(v, arg) then
+						goto skip
+					end
+				end
+
+				-- TODO: Remove this restriction, allow http requires here.
+				if not file.Exists("starfall/" .. arg, "DATA") then
+					goto skip
+				end
+
+				self.includes[#self.includes+1] = arg
+
+				::skip::
 			end
 		end,
 		Postprocess = function(self, processor)
