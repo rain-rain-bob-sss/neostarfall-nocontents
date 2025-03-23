@@ -8,6 +8,11 @@ SF.PreprocessData = {
 	directives = {
 		include = function(self, args)
 			if #args == 0 then return "Empty include directive" end
+
+			if table.HasValue(self.includes, args) then
+				return "Duplicate include directive: " .. args
+			end
+
 			if string.match(args, "^https?://") then
 				-- HTTP approach
 				local httpUrl, httpName = string.match(args, "^(.+)%s+as%s+(.+)$")
@@ -21,12 +26,22 @@ SF.PreprocessData = {
 
 		includedata = function(self, args)
 			if #args == 0 then return "Empty includedata directive" end
+
+			if table.HasValue(self.includesdata, args) then
+				return "Duplicate includesdata directive: " .. args
+			end
+
 			self.includesdata[#self.includesdata + 1] = args
 			SF.PreprocessData.directives.include(self, args)
 		end,
-		
+
 		includedir = function(self, args)
 			if #args == 0 then return "Empty includedir directive" end
+
+			if table.HasValue(self.includesdata, args) then
+				return "Duplicate includedir directive: " .. args
+			end
+
 			self.includedirs[#self.includedirs + 1] = args
 		end,
 
@@ -42,16 +57,16 @@ SF.PreprocessData = {
 
 		name = function(self, args) self.scriptname = string.sub(args, 1, 64) end,
 		author = function(self, args) self.scriptauthor = string.sub(args, 1, 64) end,
-		server = function(self, args) self.serverorclient = "server" end,
-		client = function(self, args) self.serverorclient = "client" end,
-		shared = function(self, args) self.serverorclient = nil end,
+		server = function(self, _) self.serverorclient = "server" end,
+		client = function(self, _) self.serverorclient = "client" end,
+		shared = function(self, _) self.serverorclient = nil end,
 		clientmain = function(self, args) self.clientmain = args end,
-		superuser = function(self, args) self.superuser = true end,
-		owneronly = function(self, args) self.owneronly = true end,
-		obfuscate = function(self, args) self.obfuscate = true end,
+		superuser = function(self, _) self.superuser = true end,
+		owneronly = function(self, _) self.owneronly = true end,
+		obfuscate = function(self, _) self.obfuscate = true end,
 	},
 	__index = {
-		FindError = function(self, err, args)
+		FindError = function(self, args)
 			for lineN, line in SF.GetLines(self.code) do
 				if string.find(line, args, 1, true) then
 					return tostring(lineN)
@@ -64,15 +79,36 @@ SF.PreprocessData = {
 				local func = SF.PreprocessData.directives[directive]
 				if func then
 					local err = func(self, string.Trim(args))
-					if err then error("In file "..self.path..":"..self:FindError(err, wholedirective)..", "..err) end
+					if err then error("In file " .. self.path .. ":" .. self:FindError(wholedirective) .. ", " .. err) end
 				end
+			end
+
+			for arg in string.gmatch(self.code, "require%(['\"](%S*)['\"]%)") do
+				if #arg <= 0 then
+					goto skip
+				end
+
+				for _, v in ipairs { self.includes, self.includedirs, self.includesdata, self.httpincludes } do
+					if table.HasValue(v, arg) then
+						goto skip
+					end
+				end
+
+				-- TODO: Remove this restriction, allow http requires here.
+				if not file.Exists("starfall/" .. arg, "DATA") then
+					goto skip
+				end
+
+				self.includes[#self.includes+1] = arg
+
+				::skip::
 			end
 		end,
 		Postprocess = function(self, processor)
 			if self.clientmain then
 				self.clientmain = processor:ResolvePath(self.clientmain, self.path) or error("Bad --@clientmain "..self.clientmain.." in file "..self.path)
 			end
-			
+
 			for _, incdata in ipairs(self.includesdata) do
 				incdata = processor:ResolvePath(incdata, self.path) or error("Bad --@includedata "..incdata.." in file "..self.path)
 				local fdata = processor.files[incdata]
