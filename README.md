@@ -1,6 +1,6 @@
 <div align="center">
     <a href="https://github.com/neostarfall/neostarfall">
-        <img src="./branding/neostarfall_logo_512x512.png" width="256" height="256" />
+        <img src="./branding/neostarfall-round_512x512.png" width="256" height="256" />
     </a>
     <h1>neostarfall</h1>
     <p>Starfall, by and for Starfall users</p>
