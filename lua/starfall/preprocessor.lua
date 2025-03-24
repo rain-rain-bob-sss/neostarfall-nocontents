@@ -206,7 +206,7 @@ SF.Preprocessor = {
 
 	__call = function(t, files)
 		local self = setmetatable({
-			files = setmetatable({}, {__index = function(t,k) error("Invalid file: " .. k) end}),
+			files = setmetatable({}, {__index = function(_, k) error("Invalid file: " .. k) end}),
 			mainfile = ""
 		}, t)
 
@@ -216,7 +216,7 @@ SF.Preprocessor = {
 				fdata:Preprocess()
 				self.files[path] = fdata
 			end
-			for path, fdata in pairs(self.files) do
+			for _, fdata in pairs(self.files) do
 				fdata:Postprocess(self)
 			end
 		end
@@ -245,7 +245,7 @@ SF.FileLoader = {
 			self.files[path] = fdata
 		end,
 
-		LoadUrl = function(self, url, name)
+		LoadUrl = function(self, name, url)
 			if self.files[name] then return end
 
 			local cache = self.httpCache[url]
@@ -270,7 +270,7 @@ SF.FileLoader = {
 				end,
 				failed = function(reason)
 					if self.errored then return end
-					self.errored=true
+					self.errored = true
 					self.onfail(string.format("Could not fetch --@include link (%s): %s", url, reason))
 				end,
 			}
@@ -295,7 +295,7 @@ SF.FileLoader = {
 				end
 			end
 			for name, url in pairs(fdata.httpincludes) do
-				self:LoadUrl(url, name)
+				self:LoadUrl(name, url)
 			end
 		end,
 
@@ -313,14 +313,14 @@ SF.FileLoader = {
 			if ok then
 				self:Finish()
 			else
-				self.errored=true
+				self.errored = true
 				self.onfail(err)
 			end
 		end,
 
 		Finish = function(self)
 			if self.httpRequests > 0 then return end
-			self.errored=true
+			self.errored = true
 
 			local ok, err = pcall(function()
 				local files = {}
