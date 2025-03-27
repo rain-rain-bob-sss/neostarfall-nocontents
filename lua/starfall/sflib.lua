@@ -272,7 +272,7 @@ SF.BurstObject = {
 setmetatable(SF.BurstObject, SF.BurstObject)
 
 SF.PlayerCompileBurst = SF.BurstObject("compile", "compile", 3, 1, "The rate at which the burst regenerates per second.", "The number of processors allowed to be compiled in a short interval of time via the toolgun and upload pushes ( burst )")
-SF.MaxCompileLength = CreateConVar("sf_max_compile_length", "32768", FCVAR_ARCHIVE, "The maximum length of an unobfuscated Neostarfall file.")
+SF.MaxCompileLength = CreateConVar("sf_max_compile_length", "65536", FCVAR_ARCHIVE, "The maximum length of an unobfuscated Neostarfall file.")
 SF.MaxObfuscatedCompileLength = CreateConVar("sf_max_obfuscated_compile_length", "16384", FCVAR_ARCHIVE, "The maximum length of an obfuscated Neostarfall file.")
 
 function SF.TryCompile(player, sf, sfdata)
