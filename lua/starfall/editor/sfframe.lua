@@ -1814,10 +1814,9 @@ function Editor:Setup(nTitle, nLocation, nEditorType)
 	SFHelp:SetText("SFHelper")
 	SFHelp.DoClick = function()
 		if BRANCH == "unknown" then
-			print("33")
 			gui.OpenURL(SF.Editor.HelperURL:GetString())
 		else
-			local sheet = self:CreateTab("", "helper")
+			local sheet = self:CreateTab("helper")
 			self:SetActiveTab(sheet.Tab)
 			if Editor.StartHelperUndocked:GetBool() then
 				sheet.Tab.content:Undock()
