@@ -104,7 +104,7 @@ function SF.DefaultCode()
 	Starfall Scripting Environment
 
 	Neostarfall Addon: https://github.com/neostarfall/neostarfall
-	Documentation: http://neostarfall.github.io/neostarfall
+	Documentation: https://neostarfall.pages.dev
 
 	This default code can be edited by creating a 'starfall/default.txt' file
 ]]
@@ -1874,17 +1874,13 @@ function Editor:Setup(nTitle, nLocation, nEditorType)
 	SFHelp:SetText("SFHelper")
 	SFHelp.DoClick = function()
 		if BRANCH == "unknown" then
+			print("33")
 			gui.OpenURL(SF.Editor.HelperURL:GetString())
 		else
-			local th = GetTabHandler("helper")
-			if th.htmldata then
-				local sheet = self:CreateTab("", "helper")
-				self:SetActiveTab(sheet.Tab)
-				if Editor.StartHelperUndocked:GetBool() then
-					sheet.Tab.content:Undock()
-				end
-			else
-				gui.OpenURL(SF.Editor.HelperURL:GetString())
+			local sheet = self:CreateTab("", "helper")
+			self:SetActiveTab(sheet.Tab)
+			if Editor.StartHelperUndocked:GetBool() then
+				sheet.Tab.content:Undock()
 			end
 		end
 	end

@@ -31,10 +31,10 @@ The DLLs previously here were removed because:
 3. Don't apply to linux and mac users.
 
 Here's releases for those modules:
-- [`socket`](https://neostarfall.github.io/neostarfall/#Libraries.socket) -> https://github.com/danielga/gmod_luasocket/releases/latest
-- [`xinput`](https://neostarfall.github.io/neostarfall/#Libraries.xinput) -> https://github.com/mitterdoo/garrysmod-xinput/releases/latest
-- [`joystick`](https://neostarfall.github.io/neostarfall/#Libraries.joystick) -> [you have to compile it on your own, but it's a simple batchfile.](https://github.com/MattJeanes/Joystick-Module)
+- [`socket`](https://neostarfall.pages.dev/#libraries.socket) -> https://github.com/danielga/gmod_luasocket/releases/latest
+- [`xinput`](https://neostarfall.pages.dev/#libraries.xinput) -> https://github.com/mitterdoo/garrysmod-xinput/releases/latest
+- [`joystick`](https://neostarfall.pages.dev/#libraries.joystick) -> [you have to compile it on your own, but it's a simple batchfile.](https://github.com/MattJeanes/Joystick-Module)
 
 The rest of the modules:
-- [`vr`](https://neostarfall.github.io/neostarfall/#Libraries.vr) -> [installer here](https://github.com/catsethecat/vrmod-module/releases/tag/v21)
+- [`vr`](https://neostarfall.pages.dev/#libraries.vr) -> [installer here](https://github.com/catsethecat/vrmod-module/releases/tag/v21)
 - `...` -> (PR these!)

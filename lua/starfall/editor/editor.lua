@@ -34,7 +34,18 @@ for _, name in pairs(l) do
 	end
 end
 
-SF.Editor.HelperURL = CreateConVar("sf_editor_helperurl", "http://neostarfall.github.io/neostarfall/", {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "URL for website used by SF Helper, change to allow custom documentation.")
+local DEFAULT_DOC_URL = "https://neostarfall.pages.dev?nofetch=true"
+
+SF.Editor.HelperURL = CreateConVar("sf_editor_helperurl", DEFAULT_DOC_URL, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "URL for website used by SF Helper, change to allow custom documentation.")
+
+local currentValue = SF.Editor.HelperURL:GetString()
+
+-- Switch from old URLs
+if currentValue:match("thegrb93%.github%.io/StarfallEx") then
+	SF.Editor.HelperURL:SetString(DEFAULT_DOC_URL)
+elseif currentValue:match("neostarfall%.github%.io") then
+	SF.Editor.HelperURL:SetString(DEFAULT_DOC_URL)
+end
 
 ------------------
 -- Editor

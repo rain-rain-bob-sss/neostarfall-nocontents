@@ -1271,6 +1271,13 @@ end
 -- @class directive
 -- @param model String of the model to precache
 
+--- Obfuscates your code when being sent to other clients. This can make it more difficult for other users to steal your exact source code.
+-- Note:
+-- 1. This does not do anything against servers, only play on servers you trust!
+-- 2. As long as you're running code on someone, they can always take your code if they know how to. This just makes the code hard to understand.
+-- @name obfuscate
+-- @class directive
+
 --- Set the current file to only run on the server. Shared is default. --@server
 -- @name server
 -- @class directive

@@ -9,14 +9,11 @@ local PANEL = {} -- It's our VGUI
 -------------------------------
 
 function TabHandler:Init() -- It's called when editor is initalized, you can create library map there etc
-	http.Fetch(SF.Editor.HelperURL:GetString(), function(data)
-		self.htmldata = data
-		self:RefreshHelper()
-	end)
+	self:RefreshHelper()
 end
 
 function TabHandler:RefreshHelper()
-	if self.htmldata and SF.Docs then
+	if SF.Docs then
 		local editor = SF.Editor.editor
 		for i = 1, editor:GetNumTabs() do
 			local tab = editor:GetTabContent(i)
@@ -51,7 +48,9 @@ local function htmlSetup(old, new)
 		if not (new and new:IsValid()) then return end
 		_.loaded = true
 		new.url = url
-		if SF.Docs then html:RunJavascript([[SF_DOC.BuildPages(]]..util.TableToJSON(SF.Docs)..[[);]]) end
+		if SF.Docs then
+			html:RunJavascript([[window.globalDocManager.setDocs(]] .. util.TableToJSON(SF.Docs) .. [[);]])
+		end
 	end
 end
 
@@ -100,14 +99,12 @@ function PANEL:Init() --That's init of VGUI like other PANEL:Methods(), separate
 	html:DockPadding(0, 0, 0, 0)
 	html:SetKeyboardInputEnabled(true)
 	html:SetMouseInputEnabled(true)
-	if TabHandler.htmldata then html:SetHTML(TabHandler.htmldata) end
+	html:OpenURL(SF.Editor.HelperURL:GetString())
 	htmlSetup(nil, self)
 end
 
 function PANEL:RefreshHelper()
-	if self.html then
-		self.html:SetHTML(TabHandler.htmldata)
-	end
+	self.html:OpenURL(SF.Editor.HelperURL:GetString())
 end
 
 function PANEL:Undock()
