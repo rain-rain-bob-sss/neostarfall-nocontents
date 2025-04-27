@@ -274,7 +274,8 @@ if CLIENT then
 				script_name = ent.name or "Generic"
 			end
 		elseif SF.Editor.editor then
-			script_name = SF.Editor.editor:GetActiveTab():GetText()
+			local activeTab = SF.Editor.editor:GetActiveTab()
+			script_name = IsValid(activeTab) and activeTab:GetText() or "no file open"
 		end
 		SF.DrawToolgunScreen(w, h, "PROCESSOR", script_name)
 	end

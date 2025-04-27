@@ -1560,12 +1560,15 @@ function Editor:GetTab(n)
 end
 
 function Editor:GetCurrentTabContent()
-	return self:GetActiveTab():GetPanel()
+	local activeTab = self:GetActiveTab()
+	return IsValid(activeTab) and activeTab:GetPanel() or nil
 end
 
 function Editor:GetCode()
-	if self:GetCurrentTabContent().GetCode then
-		return self:GetCurrentTabContent():GetCode() or ""
+	local activeTabPanel = self:GetCurrentTabContent()
+
+	if activeTabPanel and activeTabPanel.GetCode then
+		return activeTabPanel:GetCode() or ""
 	else
 		return ""
 	end
