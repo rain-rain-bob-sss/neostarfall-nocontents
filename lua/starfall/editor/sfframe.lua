@@ -84,20 +84,20 @@ end
 -- they are shared for all tabhandlers
 -- ----------------------------------------------------------------------
 --ConVars
-Editor.SaveTabsVar = CreateClientConVar("sf_editor_savetabs", "1", true, false)
-Editor.OpenOldTabsVar = CreateClientConVar("sf_editor_openoldtabs", "1", true, false)
-Editor.WorldClickerVar = CreateClientConVar("sf_editor_worldclicker", "0", true, false)
-Editor.LayoutVar = CreateClientConVar("sf_editor_layout", "0", true, false)
-Editor.StartHelperUndocked = CreateClientConVar("sf_helper_startundocked", "0", true, false)
-Editor.EditorFileAutoReload = CreateClientConVar(
-	"sf_editor_file_auto_reload",
+Editor.SaveTabsVar = SF.CreateClientConVar("editor_savetabs", "1", true, false)
+Editor.OpenOldTabsVar = SF.CreateClientConVar("editor_openoldtabs", "1", true, false)
+Editor.WorldClickerVar = SF.CreateClientConVar("editor_worldclicker", "0", true, false)
+Editor.LayoutVar = SF.CreateClientConVar("editor_layout", "0", true, false)
+Editor.StartHelperUndocked = SF.CreateClientConVar("helper_startundocked", "0", true, false)
+Editor.EditorFileAutoReload = SF.CreateClientConVar(
+	"editor_file_auto_reload",
 	"0",
 	true,
 	false,
 	"Controls the auto reload functionality of Neostarfall's Editor"
 )
-Editor.EditorFileAutoReloadInterval = CreateClientConVar(
-	"sf_editor_file_auto_reload_interval",
+Editor.EditorFileAutoReloadInterval = SF.CreateClientConVar(
+	"editor_file_auto_reload_interval",
 	"1",
 	true,
 	false,
@@ -138,8 +138,8 @@ function SF.DefaultCode()
 	return code
 end
 
-cvars.AddChangeCallback("sf_editor_layout", function()
-	RunConsoleCommand("sf_editor_restart")
+cvars.AddChangeCallback("nsf_editor_layout", function()
+	RunConsoleCommand("nsf_editor_restart")
 end)
 
 Editor.CreatedFonts = {}
@@ -250,8 +250,8 @@ function Editor:Init()
 	end
 end
 
-local size = CreateClientConVar("sf_editor_size", "800_600", true, false)
-local pos = CreateClientConVar("sf_editor_pos", "-1_-1", true, false)
+local size = SF.CreateClientConVar("editor_size", "800_600", true, false)
+local pos = SF.CreateClientConVar("editor_pos", "-1_-1", true, false)
 
 function Editor:LoadEditorSettings()
 	-- Position & Size
@@ -284,10 +284,10 @@ function Editor:SaveEditorSettings()
 	-- Position & Size
 	if not self.fs then
 		local w, h = self:GetSize()
-		RunConsoleCommand("sf_editor_size", w .. "_" .. h)
+		RunConsoleCommand("nsf_editor_size", w .. "_" .. h)
 
 		local x, y = self:GetPos()
-		RunConsoleCommand("sf_editor_pos", x .. "_" .. y)
+		RunConsoleCommand("nsf_editor_pos", x .. "_" .. y)
 	end
 end
 function Editor:Paint(w, h)
@@ -1217,8 +1217,8 @@ function Editor:GetSettings()
 	box:SetValue(SF.Editor.CurrentTabHandler:GetString())
 	box.OnSelect = function(self, index, value, data)
 		value = value:gsub(" %b()", "") -- Remove description
-		RunConsoleCommand("sf_editor_tab_editor", value)
-		RunConsoleCommand("sf_editor_restart")
+		RunConsoleCommand("nsf_editor_tab_editor", value)
+		RunConsoleCommand("nsf_editor_restart")
 	end
 
 	for k, v in pairs(SF.Editor.TabHandlers) do
@@ -1235,7 +1235,7 @@ function Editor:GetSettings()
 
 	local SaveTabsOnClose = vgui.Create("DCheckBoxLabel")
 	dlist:AddItem(SaveTabsOnClose)
-	SaveTabsOnClose:SetConVar("sf_editor_savetabs")
+	SaveTabsOnClose:SetConVar("nsf_editor_savetabs")
 	SaveTabsOnClose:SetText("Save tabs on close")
 	SaveTabsOnClose:SizeToContents()
 	SaveTabsOnClose:SetTooltip(
@@ -1244,7 +1244,7 @@ function Editor:GetSettings()
 
 	local OpenOldTabs = vgui.Create("DCheckBoxLabel")
 	dlist:AddItem(OpenOldTabs)
-	OpenOldTabs:SetConVar("sf_editor_openoldtabs")
+	OpenOldTabs:SetConVar("nsf_editor_openoldtabs")
 	OpenOldTabs:SetText("Open old tabs on load")
 	OpenOldTabs:SizeToContents()
 	OpenOldTabs:SetTooltip(
@@ -1253,7 +1253,7 @@ function Editor:GetSettings()
 
 	local WorldClicker = vgui.Create("DCheckBoxLabel")
 	dlist:AddItem(WorldClicker)
-	WorldClicker:SetConVar("sf_editor_worldclicker")
+	WorldClicker:SetConVar("nsf_editor_worldclicker")
 	WorldClicker:SetText("Enable Clicking Outside Editor")
 	WorldClicker:SizeToContents()
 	function WorldClicker.OnChange(pnl, bVal)
@@ -1262,7 +1262,7 @@ function Editor:GetSettings()
 
 	local UndockHelper = vgui.Create("DCheckBoxLabel")
 	dlist:AddItem(UndockHelper)
-	UndockHelper:SetConVar("sf_helper_startundocked")
+	UndockHelper:SetConVar("nsf_helper_startundocked")
 	UndockHelper:SetText("Undock helper on open")
 	UndockHelper:SizeToContents()
 
@@ -2045,7 +2045,7 @@ function Editor:Setup(nTitle, nLocation, nEditorType)
 	SFHelp:SetText("SFHelper")
 	SFHelp.DoClick = function()
 		if BRANCH == "unknown" then
-			gui.OpenURL(SF.Editor.HelperURL:GetString())
+			gui.OpenURL(SF.HelperURL)
 		else
 			local sheet = self:CreateTab("helper")
 			self:SetActiveTab(sheet.Tab)
@@ -2224,7 +2224,7 @@ function PANEL:UpdatePlayers(players)
 			local killserver = vgui.Create("StarfallButton", cpuServer)
 			killserver:SetText("Admin Kill")
 			killserver.DoClick = function()
-				RunConsoleCommand("sf_kill", steamid)
+				RunConsoleCommand("nsf_kill", steamid)
 			end
 			killserver:Dock(LEFT)
 		end
@@ -2244,7 +2244,7 @@ function PANEL:UpdatePlayers(players)
 		local killclient = vgui.Create("StarfallButton", cpuClient)
 		killclient:SetText("Kill all")
 		killclient.DoClick = function()
-			RunConsoleCommand("sf_kill_cl", steamid)
+			RunConsoleCommand("nsf_kill_cl", steamid)
 		end
 		killclient:Dock(LEFT)
 
@@ -2316,11 +2316,11 @@ list.Set("DesktopWindows", "StarfallUsers", {
 	onewindow = true,
 	init = function(icon, window)
 		window:Remove()
-		RunConsoleCommand("sf_userlist")
+		RunConsoleCommand("nsf_userlist")
 	end,
 })
 
-concommand.Add("sf_userlist", function()
+SF.AddConCommand("userlist", function()
 	if userPanel and userPanel:IsValid() then
 		return
 	end
