@@ -109,8 +109,8 @@ function SF.DefaultCode()
 		local contents = file.Read("starfall/default.txt", "DATA")
 		local contentsHash = util.CRC(contents)
 
-		-- Check if same as the old default
-		if contentsHash == 0xd75b2989 then
+		-- Only return if it isn't the old default
+		if contentsHash ~= 0xd75b2989 then
 			return contents
 		end
 
