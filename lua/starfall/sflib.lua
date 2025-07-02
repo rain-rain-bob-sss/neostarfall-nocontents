@@ -362,14 +362,14 @@ SF.BurstObject = {
 		local ratename = cvarname .. "_burstrate" .. (CLIENT and "_cl" or "")
 		local ratecvar = SF.CreateConVar(ratename, tostring(rate), FCVAR_ARCHIVE, ratehelp)
 		t.rate = ratecvar:GetFloat() * scale
-		cvars.AddChangeCallback(ratename, function()
+		cvars.AddChangeCallback(ratecvar:GetName(), function()
 			t.rate = ratecvar:GetFloat() * scale
 		end)
 
 		local maxname = cvarname .. "_burstmax" .. (CLIENT and "_cl" or "")
 		local maxcvar = SF.CreateConVar(maxname, tostring(max), FCVAR_ARCHIVE, maxhelp)
 		t.max = maxcvar:GetFloat() * scale
-		cvars.AddChangeCallback(maxname, function()
+		cvars.AddChangeCallback(maxcvar:GetName(), function()
 			t.max = maxcvar:GetFloat() * scale
 		end)
 
