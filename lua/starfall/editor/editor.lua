@@ -727,7 +727,7 @@ if CLIENT then
 			local BoneIndx = ply:LookupBone("ValveBiped.Bip01_Head1") or ply:LookupBone("ValveBiped.HC_Head_Bone") or 0
 			local BonePos, BoneAng = ply:GetBonePosition(BoneIndx)
 			local particle = emitter:Add(
-				"radon/starfall2",
+				"icon16/star.png",
 				BonePos + Vector(math.random(-10, 10), math.random(-10, 10), 60 + math.random(0, 10))
 			)
 			if particle then

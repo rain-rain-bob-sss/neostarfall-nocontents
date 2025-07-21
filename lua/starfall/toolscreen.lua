@@ -114,10 +114,11 @@ for i = 1, star_count do
 	stars[i] = star_init()
 end
 
-local overlay_material = Material("radon/starfall_tool_overlay.png", "smooth")
+local overlay_material = Material("gui/gradient_down", "smooth")
 overlay_material:SetInt("$flags", 0x8000 + 0x0020)
+overlay_material:SetVector("$color",Vector(255,255,0))
 
-local star_material = Material("radon/starfall_tool_star.png", "smooth")
+local star_material = Material("icon16/star.png", "smooth")
 star_material:SetInt("$flags", 0x8000 + 0x0080 + 0x0020 + 0x0010)
 
 -- RenderTargets created before rendering is ready suffer from depth related issues
@@ -187,9 +188,20 @@ function SF.DrawToolgunScreen(w, h, title, scroll_text)
 	surface.DrawTexturedRect(0, 0, w, h)
 
 	-- Overlay
-	surface.SetDrawColor(255, 255, 255, 255)
+	surface.SetDrawColor(255, 255, 255, 128)
 	surface.SetMaterial(overlay_material)
 	surface.DrawTexturedRect(0, 0, w, h)
+	draw.SimpleTextOutlined(
+		"STARFALL",
+		"StarfallToolBig",
+		128,
+		50,
+		color_text,
+		TEXT_ALIGN_CENTER,
+		TEXT_ALIGN_CENTER,
+		2,
+		color_text_outline
+	)
 	draw.SimpleTextOutlined(
 		title,
 		"StarfallToolBig",

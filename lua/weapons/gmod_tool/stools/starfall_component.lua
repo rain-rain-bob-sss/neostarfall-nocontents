@@ -7,7 +7,7 @@ TOOL.ConfigName = ""
 -- ------------------------------- Sending / Receiving ------------------------------- --
 
 TOOL.ClientConVar["Model"] = "models/hunter/plates/plate2x2.mdl"
-TOOL.ClientConVar["ModelHUD"] = "models/bull/dynamicbuttonsf.mdl"
+TOOL.ClientConVar["ModelHUD"] = "models/hunter/plates/plate1x1.mdl"
 TOOL.ClientConVar["Type"] = "1"
 TOOL.ClientConVar["parent"] = "0"
 TOOL.ClientConVar["createflat"] = "0"
@@ -28,7 +28,7 @@ if SERVER then
 			return false
 		end
 		if not (util.IsValidModel(model) and util.IsValidProp(model)) then
-			model = "models/spacecode/sfchip.mdl"
+			model = "models/hunter/plates/plate1x1.mdl"
 		end
 
 		sf:SetAngles(Ang)

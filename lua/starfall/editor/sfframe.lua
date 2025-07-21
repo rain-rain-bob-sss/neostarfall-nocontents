@@ -232,7 +232,7 @@ function Editor:Init()
 		additive = false,
 	}
 	surface.CreateFont("E2SmallFont", fontTable)
-	self.logo = surface.GetTextureID("radon/starfall2")
+	self.logo = surface.GetTextureID("icon16/star.png")
 
 	self:InitComponents()
 
@@ -2310,7 +2310,7 @@ local userPanel
 list.Set("DesktopWindows", "StarfallUsers", {
 
 	title = "Neostarfall List",
-	icon = "radon/starfall2",
+	icon = "icon16/star.png",
 	width = 520,
 	height = 700,
 	onewindow = true,
